@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/images"
+    android:id="@+id/drawer_layout"
+    android:orientation="vertical"
+    android:weightSum="7">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <include
+            layout="@layout/nav_header"/>
+
+        <TextView
+            android:id="@+id/display"
+            android:layout_width="352dp"
+            android:layout_height="285dp"
+            android:layout_gravity="center"
+            android:textColor="@color/yellow"
+            android:textSize="24sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.4"
+
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/dpart"
+                android:layout_width="335dp"
+                android:layout_height="165dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="54dp"
+                android:layout_marginRight="54dp"
+                android:layout_marginBottom="49dp"
+                android:hint="Please paste the copied text here for translation/to send"
+                android:textColor="@color/yellow"
+                android:textColorHint="@color/yellow" />
+
+            <Spinner
+                android:id="@+id/language"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="221dp"
+                android:layout_marginRight="221dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/ic_rect"
+                android:entries="@array/language"
+                android:prompt="@string/select"
+                android:textColor="#E9EDEF" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_weight="0.2">
+
+            <EditText
+                android:id="@+id/number"
+                android:layout_width="235dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="158dp"
+                android:layout_marginRight="158dp"
+                android:layout_marginBottom="89dp"
+                android:hint="Enter Phone Number"
+                android:textColor="@color/yellow"
+                android:textColorHint="@color/yellow" />
+
+            <Button
+                android:id="@+id/send"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="118dp"
+                android:layout_marginRight="118dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/ic_rect"
+                android:text="Send"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/white">
+        <include
+            layout="@layout/nav_drawer"/>
+    </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+</androidx.drawerlayout.widget.DrawerLayout>

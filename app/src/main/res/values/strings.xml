@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">TextRead</string>
+    <string name="data">Enter copied text to send</string>
+    <string name="lang">Select Language</string>
+    <string name="select">Select</string>
+    <string-array name="language">
+        <item>..Choose Language..</item>
+        <item>Marathi</item>
+        <item>Hindi</item>
+        <item>Urdu</item>
+        <item>French</item>
+        <item>Japanese</item>
+        <item>German</item>
+        <item>Spanish</item>
+    </string-array>
+    <string name="title_activity_drawer">Drawer</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="email_error">Enter a valid email</string>
+    <string name="error_invalid_email">"Please enter your valid email address"</string>
+    <string name="password_error">"Enter Password"</string>
+    <string name="error_invalid_password">"Enter Valid password"</string>
+    <string name="Open">open</string>
+
+    <string name="Close">close</string>
+
+
+</resources>

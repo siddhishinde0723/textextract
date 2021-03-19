@@ -1,0 +1,2183 @@
+Scanner.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/images"
+    android:orientation="vertical"
+    android:weightSum="7"
+    android:visibility="visible">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2">
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2.9">
+        <SurfaceView
+            android:id="@+id/surface_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2">
+
+    </LinearLayout>
+
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="0dp"
+android:layout_weight="2">
+    <TextView
+        android:id="@+id/text"
+        android:text="No Text"
+        android:layout_width="match_parent"
+        android:textColor="@color/yellow"
+        android:layout_height="wrap_content"
+        android:textIsSelectable="true"
+        />
+
+</LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3">
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5">
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Logout"
+            android:background="@drawable/ic_rect"
+
+            android:textAllCaps="false"
+/>
+    </LinearLayout>
+</LinearLayout>
+
+
+Display.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/images"
+    android:orientation="vertical"
+    android:weightSum="7"
+    android:visibility="visible">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5">
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2">
+
+        <TextView
+            android:id="@+id/details"
+            android:layout_width="match_parent"
+            android:layout_height="123dp"
+
+
+            android:textColor="@color/yellow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:ignore="MissingConstraints" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2">
+
+        <EditText
+            android:id="@+id/data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/yellow"
+            android:textColorHint="@color/yellow"
+            android:text="@string/data"
+
+
+             />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <EditText
+            android:id="@+id/number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/yellow"
+            android:textColorHint="@color/yellow"
+            android:hint="Enter Phone Number"
+
+            android:inputType="number" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5">
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/send"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="236dp"
+            android:layout_marginRight="236dp"
+            android:layout_marginBottom="33dp"
+            android:background="@drawable/ic_rect"
+            android:text="Send"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="258dp"
+            tools:layout_editor_absoluteY="645dp" />
+
+        <Button
+            android:id="@+id/changeLanguage"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="65dp"
+            android:layout_marginRight="65dp"
+            android:layout_marginBottom="35dp"
+            android:background="@drawable/ic_rect"
+            android:text="Change Language"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            tools:ignore="MissingConstraints"
+
+            tools:layout_editor_absoluteX="258dp"
+            tools:layout_editor_absoluteY="645dp" />
+
+    </RelativeLayout>
+
+    </LinearLayout>
+
+Reset Pass.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/images"
+    android:orientation="vertical"
+    android:weightSum="7"
+    android:visibility="visible">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="78dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:padding="5dp"
+            android:text="Forgot your password?"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+    <EditText
+        android:id="@+id/edt_reset_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+
+        android:hint="Your email here"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/yellow"
+        android:textColorHint="@color/yellow" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:gravity="center">
+        <Button
+            android:id="@+id/btn_reset_password"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+
+
+            android:background="@drawable/ic_rect"
+            android:text="Reset Password"
+            android:textAllCaps="false"
+
+            android:textColor="@color/black" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3">
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:layout_weight="0.5">
+    <Button
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+
+        android:background="@drawable/ic_rect"
+        android:text="Back"
+        android:textAllCaps="false"
+
+        android:textColor="@color/black" />
+    </LinearLayout>
+
+</LinearLayout>
+
+Login.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/images"
+    android:orientation="vertical"
+    android:weightSum="5"
+    android:visibility="visible">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5">
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:gravity="center">
+    <TextView
+        android:id="@+id/textview1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Login"
+        android:textColor="@color/yellow"
+        android:textSize="30dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5">
+    <EditText
+        android:id="@+id/editText_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Your Email"
+        android:textColor="@color/yellow"
+        android:textColorHint="@color/yellow"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5">
+    <EditText
+        android:id="@+id/editText_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:hint="Enter Your Password"
+        android:inputType="textPassword"
+        android:textColor="@color/yellow"
+        android:textColorHint="@color/yellow"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:gravity="center">
+    <Button
+        android:id="@+id/button_login"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_rect"
+        android:text="Login"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textColorHighlight="#040303"
+        android:textColorLink="#090808"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:gravity="center">
+
+    <Button
+        android:id="@+id/sign_in_button"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/googleg_standard_color_18"
+        android:text=""
+        android:textAllCaps="false"
+        android:textSize="16sp" />
+    </LinearLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5">
+
+        <TextView
+            android:id="@+id/notlogin"
+            android:layout_width="136dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="151dp"
+
+            android:layout_marginRight="151dp"
+            android:layout_marginBottom="27dp"
+            android:gravity="center"
+            android:text="Dont have account?"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/button_SignUP"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="21dp"
+            android:layout_marginRight="21dp"
+            android:layout_marginBottom="13dp"
+            android:background="@drawable/ic_rect"
+            android:text=" Sign Up"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:ignore="MissingConstraints" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:gravity="center"
+        >
+
+        <TextView
+            android:id="@+id/resetpass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+
+            android:text="Forgot Password?"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+
+</LinearLayout>
+
+
+Main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/images"
+    android:orientation="vertical"
+    android:weightSum="5"
+    android:visibility="visible">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:gravity="center">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:gravity="center"
+        android:text="Registration"
+        android:textAllCaps="false"
+        android:textColor="@color/yellow"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5">
+        <EditText
+            android:id="@+id/EditText_User_Name"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:hint="Enter Your Name Here"
+            android:textColor="@color/yellow"
+            android:textColorHint="@color/yellow"
+            tools:ignore="MissingConstraints"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5">
+    <EditText
+        android:id="@+id/EditText_User_EmailID"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:hint="Enter Your Email Here"
+        android:textColor="@color/yellow"
+        android:textColorHint="@color/yellow"
+        tools:ignore="MissingConstraints"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5">
+
+    <EditText
+        android:id="@+id/EditText_User_Password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:hint="Enter Your Password Here"
+        android:inputType="textPassword"
+        android:textColor="@color/yellow"
+        android:textColorHint="@color/yellow"
+/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:gravity="center"
+    >
+    <Button
+        android:id="@+id/Button_SignUp"
+
+        style="@style/Widget.AppCompat.Button.Colored"
+
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+
+        android:background="@drawable/ic_rect"
+
+        android:text="Sign Up"
+        android:textAllCaps="false"
+
+        android:textColor="@color/black"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="238dp"
+        tools:layout_editor_absoluteY="480dp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5">
+
+        <TextView
+            android:id="@+id/textsignup"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="176dp"
+            android:layout_marginRight="176dp"
+
+            android:layout_marginBottom="107dp"
+            android:gravity="center"
+            android:text="Already Registered?"
+            android:textColor="@color/white"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="645dp" />
+
+        <Button
+
+            android:id="@+id/Button_LoginActivity"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentEnd="true"
+
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="22dp"
+            android:layout_marginRight="22dp"
+            android:layout_marginBottom="94dp"
+            android:background="@drawable/ic_rect"
+            android:text="Login"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="258dp"
+            tools:layout_editor_absoluteY="645dp" />
+    </RelativeLayout>
+
+
+
+</LinearLayout>
+
+
+Profile.xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/images"
+    android:id="@+id/drawer_layout"
+    android:orientation="vertical"
+    android:weightSum="7">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <include
+            layout="@layout/nav_header"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="282dp"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/profile"
+                android:layout_width="400dp"
+                android:layout_height="180dp"
+                android:layout_margin="16dp"
+                android:onClick="ClickLogo"
+                android:src="@drawable/ic_profile" />
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_profile"/>
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/yellow"
+                android:textColorHint="@color/yellow"
+                android:padding="12dp"
+
+                android:text="Name"
+
+
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_email"/>
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/yellow"
+                android:textColorHint="@color/yellow"
+                android:padding="12dp"
+
+                android:text="Email "
+
+
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="ChangePassword"
+            />
+
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/white">
+        <include
+            layout="@layout/nav_drawer"/>
+    </RelativeLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>
+
+Display.java
+package com.example.textread;
+import android.Manifest;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.net.Uri;
+import android.os.Bundle;
+import android.telephony.SmsManager;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
+import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslator;
+
+import java.util.Locale;
+
+
+public class Display extends AppCompatActivity {
+
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+      //  loadLocale();
+        setContentView(R.layout.activity_display);
+      //  ActionBar actionBar=getSupportActionBar();
+        //actionBar.setTitle(getResources().getString(R.string.app_name));
+
+
+
+        TextView display1 = findViewById(R.id.details);
+        Bundle bn=getIntent().getExtras();
+        String s = bn.getString("");
+        display1.setText(String.valueOf(s));
+        display1.setTextIsSelectable(true);
+
+/*
+        Button changeLanguage=findViewById(R.id.changeLanguage);
+        changeLanguage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showChangeLanguageDialog();
+            }
+        });
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+         final EditText data = findViewById(R.id.data);
+
+        final EditText number = findViewById(R.id.number);
+        ActivityCompat.requestPermissions(Display.this, new String[]{Manifest.permission.SEND_SMS, Manifest.permission.READ_SMS}, PackageManager.PERMISSION_GRANTED);
+
+        Button send = (Button) findViewById(R.id.send);
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(
+                        Display.this);
+                builder.setTitle("Send");
+                builder.setMessage("Send Data");
+                builder.setNeutralButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,
+                                                int which) {
+                                Toast.makeText(getApplicationContext(), "Cancel is clicked", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                builder.setNegativeButton("WhatsApp",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,
+                                                int which) {
+                                String text = data.getText().toString();
+                                String toNumber = number.getText().toString();
+
+
+                                Intent intent = new Intent(Intent.ACTION_VIEW);
+                                intent.setData(Uri.parse("http://api.whatsapp.com/send?phone="  + "&text=" + text));
+                                startActivity(intent);
+                            }
+                        });
+                builder.setPositiveButton("Message",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,
+                                                int which) {
+                                String text1 = data.getText().toString();
+                                String phone_Num = number.getText().toString();
+
+                                try {
+                                    SmsManager sms = SmsManager.getDefault(); // using android SmsManager
+                                     sms.sendTextMessage(phone_Num, null, text1, null, null);
+                                    Toast.makeText(Display.this, "Sms Send", Toast.LENGTH_SHORT).show();// adding number and text
+                                } catch (Exception e) {
+                                    Toast.makeText(Display.this, "Sms not Send", Toast.LENGTH_SHORT).show();
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+
+
+                builder.show();
+            }
+        });
+
+
+    }
+/*
+    private void showChangeLanguageDialog() {
+        final String[] listItems={"Marathi","French"};
+        AlertDialog.Builder mBuilder=new AlertDialog.Builder(Display.this);
+        mBuilder.setTitle("Choose Language");
+        mBuilder.setSingleChoiceItems(listItems, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                if(i == 0){
+                    setLocale("mr");
+                    recreate();
+
+                }
+                else if(i==0){
+                    setLocale("fr");
+                    recreate();
+
+                }
+
+                dialog.dismiss();
+
+            }
+        });
+        AlertDialog mDialog=mBuilder.create();
+        mDialog.show();
+    }
+
+    private void setLocale(String lang) {
+        Locale locale=new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration configuration=new Configuration();
+        configuration.locale=locale;
+        getBaseContext().getResources().updateConfiguration(configuration,getBaseContext().getResources().getDisplayMetrics());
+        SharedPreferences.Editor editor =getSharedPreferences("Settings",MODE_PRIVATE).edit();
+        editor.putString("My_Lang",lang);
+        editor.apply();
+
+    }
+    public void loadLocale(){
+        SharedPreferences prefs=getSharedPreferences("Settings", Activity.MODE_PRIVATE);
+        String language=prefs.getString("My_Lang","");
+        setLocale(language);
+
+    }*/
+
+
+}
+
+
+
+Home.java
+package com.example.textread;
+
+
+import android.app.Application;
+
+import android.content.Intent;
+import android.net.Uri;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+public class Home extends Application{
+
+    public void onCreate() {
+        super.onCreate();
+
+        FirebaseAuth mAuth =FirebaseAuth.getInstance();
+        FirebaseUser user=mAuth.getCurrentUser();
+
+            //startActivity(new Intent(Home.this,ScannerActivity.class));
+        if (user != null) {
+
+
+            Intent intent=new Intent(Home.this, ScannerActivity.class);
+        }
+
+
+
+    }
+
+}
+
+
+
+Login.java
+package com.example.textread;
+
+
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.GoogleAuthProvider;
+
+
+public class Login extends AppCompatActivity {
+    EditText email, password;
+
+    // Creating string to hold values.
+    String EmailHolder, PasswordHolder;
+
+    Button Login, SignUP, ButtonGoToLoginActivity;
+    // Creating Boolean to hold EditText empty true false value
+    Boolean EditTextEmptyCheck;
+
+    // Creating progress dialog
+    ProgressDialog progressDialog;
+
+    // Creating FirebaseAuth object
+    FirebaseAuth firebaseAuth;
+    GoogleSignInClient mGoogleSignInClient;
+    private static int RC_SIGN_IN = 1;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+        // Assign ID's
+        email = (EditText) findViewById(R.id.editText_email);
+        password = (EditText) findViewById(R.id.editText_password);
+
+        Login = (Button) findViewById(R.id.button_login);
+        SignUP = (Button) findViewById(R.id.button_SignUP);
+        ButtonGoToLoginActivity = (Button) findViewById(R.id.sign_in_button);
+
+
+        progressDialog = new ProgressDialog(Login.this);
+        // Assign FirebaseAuth instance to FirebaseAuth object
+        firebaseAuth = FirebaseAuth.getInstance();
+        if (firebaseAuth.getCurrentUser() != null) {
+
+            // Finishing current Login Activity
+            finish();
+
+            Intent intent = new Intent(Login.this, ScannerActivity.class);
+            startActivity(intent);
+        }
+
+        Login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CheckEditTextIsEmptyOrNot();
+                if (EditTextEmptyCheck) {
+                    LoginFunction();
+
+                } else {
+                    Toast.makeText(Login.this, "Please Fill All the Fields", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        Button signup = findViewById(R.id.button_SignUP);
+
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                // Opening the Login Activity using Intent
+                Intent intent = new Intent(Login.this, MainActivity.class);
+                startActivity(intent);
+
+            }
+        });
+        //to reset the  password
+        TextView resetpass = findViewById(R.id.resetpass);
+        resetpass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // Finishing current Main Activity.
+                finish();
+
+                // Opening the Login Activity using Intent.
+                Intent intent = new Intent(Login.this, ResetPass.class);
+                startActivity(intent);
+
+            }
+        });
+        // Adding click listener to ButtonGoToLoginActivity button.
+        ButtonGoToLoginActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // Finishing current Main Activity.
+                finish();
+
+                // Opening the Login Activity using Intent.
+                Intent intent = new Intent(Login.this, MainActivity.class);
+                startActivity(intent);
+
+            }
+        });
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken("774826098969-1ap6c3iugur6oa5j1r1kj0igk4tgj7c9.apps.googleusercontent.com")
+                .requestEmail()
+                .build();
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        Button signInButton = findViewById(R.id.sign_in_button);
+
+
+        signInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signIn();
+
+            }
+        });
+
+    }
+
+    public void CheckEditTextIsEmptyOrNot() {
+
+        // Getting value form EditText and fill into Holder string variable
+        EmailHolder = email.getText().toString().trim();
+
+        PasswordHolder = password.getText().toString().trim();
+
+        // Checking Both EditText is empty or not
+        if (TextUtils.isEmpty(EmailHolder) || TextUtils.isEmpty(PasswordHolder)) {
+            // If any of EditText is empty then set value as false
+            EditTextEmptyCheck = false;
+        } else {
+            // If any of EditText is empty then set value as true
+            EditTextEmptyCheck = true;
+        }
+
+    }
+
+    public void LoginFunction() {
+
+        progressDialog.setMessage("Please Wait");
+
+        // Showing progressDialog.
+        progressDialog.show();
+
+        // Calling  signInWithEmailAndPassword buildin  function with firebase object and passing EmailHolder and PasswordHolder inside it
+        firebaseAuth.signInWithEmailAndPassword(EmailHolder, PasswordHolder)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        // task  Successful
+                        if (task.isSuccessful()) {
+
+                            progressDialog.dismiss();
+                            finish();
+                            Intent intent = new Intent(Login.this, ScannerActivity.class);
+                            startActivity(intent);
+                        } else {
+                            progressDialog.dismiss();
+                            Toast.makeText(Login.this, "Email or Password Not found, Please Try Again", Toast.LENGTH_LONG).show();
+
+
+                        }
+                    }
+                });
+
+    }
+
+    public void signIn() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> signInTask = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                GoogleSignInAccount signInAcc = signInTask.getResult(ApiException.class);
+
+                AuthCredential authCredential = GoogleAuthProvider.getCredential(signInAcc.getIdToken(), null);
+                firebaseAuth.signInWithCredential(authCredential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Toast.makeText(getApplicationContext(), "Logged in Successfully", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(), ScannerActivity.class));
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
+
+            } catch (ApiException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+}
+
+
+Main.java
+package com.example.textread;
+
+
+
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText email, password,name ;
+    Button SignUp,login;
+    String userID;
+    // Creating string to hold email and password .
+    String EmailHolder, PasswordHolder,NameHolder ;
+    ProgressDialog progressDialog;
+
+    // Creating FirebaseAuth object.
+    FirebaseAuth firebaseAuth ;
+    FirebaseFirestore firestore;
+    private static final String TAG = "Login";
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Assigning layout email ID and Password ID.
+        name=(EditText)findViewById(R.id.EditText_User_Name);
+        email = (EditText)findViewById(R.id.EditText_User_EmailID);
+        password = (EditText)findViewById(R.id.EditText_User_Password);
+
+        // Assign button layout ID.
+        SignUp = (Button)findViewById(R.id.Button_SignUp);
+
+        // Creating object instance.
+        firebaseAuth = FirebaseAuth.getInstance();
+        firestore =FirebaseFirestore.getInstance();
+        progressDialog = new ProgressDialog(MainActivity.this);
+
+        // Adding click listener to Sign Up Button.
+        SignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NameHolder = name.getText().toString().trim();
+                 EmailHolder = email.getText().toString().trim();
+                 PasswordHolder= password.getText().toString().trim();
+
+                if (TextUtils.isEmpty(NameHolder)) {
+                    name.setError("Enter Your Name");
+                    return;
+                }
+                if (TextUtils.isEmpty(EmailHolder)) {
+                    email.setError("Email is Required.");
+                    return;
+                }
+                if (TextUtils.isEmpty(PasswordHolder)) {
+                    password.setError("Password is Required.");
+                    return;
+                }
+                // register the user in firebase
+
+                firebaseAuth.createUserWithEmailAndPassword(EmailHolder, PasswordHolder)
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                                if (task.isSuccessful()) {
+
+                                    Toast.makeText(MainActivity.this, "Register Successfully", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(getApplicationContext(), Login.class));
+                                    userID = firebaseAuth.getCurrentUser().getUid();
+                                    DocumentReference documentReference = firestore.collection("users").document(userID);
+                                    Map<String,Object> user = new HashMap<>();
+                                    user.put("Name",NameHolder);
+                                    user.put("Email",EmailHolder);
+                                    documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Log.d(TAG,"Data is added"+userID);
+
+                                        }
+                                    });
+                                    startActivity(new Intent(getApplicationContext(), Login.class));
+                                }
+
+                                else {
+                                    Toast.makeText(MainActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        });
+
+            }
+        });
+    }
+}
+
+
+Profile.java
+package com.example.textread;
+
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.MediaStore;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.bumptech.glide.Glide;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
+
+import java.util.regex.Pattern;
+
+public class Profile extends AppCompatActivity {
+    TextView name,email,text,change;
+    FirebaseAuth auth;
+    FirebaseFirestore fStore;
+    String userID;
+    FirebaseUser user;
+    ImageView profile,profileimg;
+    GoogleSignInClient mGoogleSignInClient;
+    DrawerLayout drawerLayout;
+    StorageReference storageReference;
+
+
+    @SuppressLint({"SetTextI18n", "CheckResult"})
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_profile);
+        name = findViewById(R.id.name);
+        text = findViewById(R.id.text);
+       // change=findViewById(R.id.change);
+        profileimg = findViewById(R.id.profileimg);
+        email = findViewById(R.id.email);
+        auth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
+        profile = findViewById(R.id.profile);
+        userID = auth.getCurrentUser().getUid();
+        user = auth.getCurrentUser();
+
+        storageReference = FirebaseStorage.getInstance().getReference();
+        drawerLayout=findViewById(R.id.drawer_layout);
+
+
+        StorageReference profileRef = storageReference.child("users/"+auth.getCurrentUser().getUid()+"profile.jpg");
+        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).into(profile);
+            }
+        });
+        StorageReference profileRef1 = storageReference.child("users/"+auth.getCurrentUser().getUid()+"profile.jpg");
+        profileRef1.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).into(profileimg);
+            }
+        });
+
+        DocumentReference documentReference = fStore.collection("users").document(userID);
+        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                name.setText(documentSnapshot.getString("Name"));
+                email.setText(documentSnapshot.getString("Email"));
+            }
+        });
+        DocumentReference documentReference1 = fStore.collection("users").document(userID);
+        documentReference1.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                text.setText(documentSnapshot.getString("Name"));
+            }
+        });
+
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //open gallery
+                Intent openGallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(openGallery,1000);
+            }
+        });
+      /*  GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestProfile()
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(Profile.this);
+        if (acct != null) {
+            String personName = acct.getDisplayName();
+            String personGivenName = acct.getGivenName();
+            String personFamilyName = acct.getFamilyName();
+            String personEmail = acct.getEmail();
+            Uri personPhoto = acct.getPhotoUrl();
+            name.setText(""+personName);
+            email.setText(""+personEmail);
+            Glide.with(this).load(personName);
+            Glide.with(this).load(personPhoto).into(profile);
+        }*/
+
+        change.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final EditText resetPassword = new EditText(v.getContext());
+                final AlertDialog.Builder passwordResetDialog = new AlertDialog.Builder(v.getContext());
+                passwordResetDialog.setTitle("Reset Password ?");
+
+                passwordResetDialog.setView(resetPassword);
+
+                passwordResetDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // extract the email and send reset link
+                        String newPassword = resetPassword.getText().toString();
+                        user.updatePassword(newPassword).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(Profile.this, "Password Reset Successfully.", Toast.LENGTH_SHORT).show();
+                                //    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(Profile.this, "Password Reset Failed.", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+
+                passwordResetDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // close
+                    }
+                });
+
+                passwordResetDialog.create().show();
+
+            }
+        });
+    }
+
+
+
+
+    protected void onActivityResult(int requestCode,int resultCode, @androidx.annotation.Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1000) {
+            if (resultCode == Activity.RESULT_OK) {
+                Uri imageUri = data.getData();
+                //  profile.setImageURI(imageUri);
+                uploadImage(imageUri);
+
+
+
+            }
+        }
+    }
+
+    private void uploadImage(Uri imageUri) {
+        //upload image to firebase
+        final StorageReference fileRef = storageReference.child("users/"+auth.getCurrentUser().getUid()+"profile.jpg");
+        fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Picasso.get().load(uri).into(profile);
+
+                    }
+                });
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(Profile.this,"Fail",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void ClickMenu(View view){
+        //open drawer
+        openDrawer(drawerLayout);
+    }
+
+    public static void  openDrawer(DrawerLayout drawerLayout) {
+        //open drawer layout
+        drawerLayout.openDrawer(GravityCompat.START);
+
+    }
+
+    public void ClickLogo(View view){
+        //close drawer
+        closeDrawer(drawerLayout);
+    }
+
+    public static void closeDrawer(DrawerLayout drawerLayout) {
+        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+            //when drawer is open close it
+            drawerLayout.closeDrawer(GravityCompat.START);
+
+        }
+    }
+    public void ClickHome(View view){
+        //recreate activity
+        redirectActivity(this,ScannerActivity.class);
+
+    }
+    public void ClickDisplay(View view){
+        //recreate activity
+        redirectActivity(this,Display.class);
+
+    }
+    public void Profile(View view){
+        //recreate activity
+        recreate();
+    }
+
+
+    public static void redirectActivity(Activity activity, Class aClass) {
+        //initialized intent
+        Intent intent = new Intent(activity,aClass);
+        //set flag
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        //start activity
+        activity.startActivity(intent);
+
+    }
+
+    public void Logout(View view) {
+        //recreate activity
+        logout(Profile.this,Login.class);
+    }
+    public  void logout(Activity activity,Class aClass){
+
+        auth.signOut();
+        finish();
+
+        Intent intent = new Intent(Profile.this, Login.class);
+        Toast.makeText(Profile.this, "Logged Out Successfully.", Toast.LENGTH_LONG).show();
+        startActivity(intent);
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //close drawer
+        closeDrawer(drawerLayout);
+    }
+
+
+}
+
+Reset.java
+package com.example.textread;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+
+public class ResetPass extends AppCompatActivity {
+
+
+    private EditText edtEmail;
+    private Button btnResetPassword,btnBack;
+    private FirebaseAuth mAuth;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_reset_pass);
+
+        edtEmail = (EditText) findViewById(R.id.edt_reset_email);
+        btnResetPassword = (Button) findViewById(R.id.btn_reset_password);
+        btnBack = (Button) findViewById(R.id.btn_back);
+
+        mAuth = FirebaseAuth.getInstance();
+
+        btnResetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String email = edtEmail.getText().toString().trim();
+
+                if (TextUtils.isEmpty(email)) {
+                    Toast.makeText(getApplicationContext(), "Enter your email!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                //build in method  which will send the link to reset the password to your email id entered
+                mAuth.sendPasswordResetEmail(email)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(ResetPass.this, "Check email to reset your password!", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(ResetPass.this, "Fail to send reset password email!", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+            }
+        });
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                Intent intent = new Intent(ResetPass.this, Login.class);
+
+            }
+        });
+    }
+
+}
+
+Scanner.java
+package com.example.textread;
+
+
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Camera;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Parcelable;
+import android.provider.MediaStore;
+import android.util.Log;
+import android.util.SparseArray;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.vision.CameraSource;
+import com.google.android.gms.vision.Detector;
+import com.google.android.gms.vision.text.TextBlock;
+import com.google.android.gms.vision.text.TextRecognizer;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
+/*
+import com.google.firebase.ml.vision.FirebaseVision;
+import com.google.firebase.ml.vision.common.FirebaseVisionImage;
+import com.google.firebase.ml.vision.text.FirebaseVisionText;
+import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
+*/
+import java.io.IOException;
+import java.io.Serializable;
+
+
+public class ScannerActivity extends AppCompatActivity {
+
+    SurfaceView camareview;
+    CameraSource cameraSource;
+    TextView textView,text,name,email;
+    FirebaseAuth firebaseAuth;
+    final int RequestCameraPermissionID = 1001;
+    ClipboardManager clipboardManager;
+    Button paste;
+    String userID;
+    ImageView profile,profileimg;
+    DrawerLayout drawerLayout;
+    StorageReference storageReference;
+    FirebaseFirestore fStore;
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case RequestCameraPermissionID: {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                        return;
+                    }
+                    try {
+                        cameraSource.start(camareview.getHolder());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
+
+
+    @SuppressLint("ServiceCast")
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_scanner);
+
+        //Assign Id
+        camareview = (SurfaceView) findViewById(R.id.surface_view);
+        textView = findViewById(R.id.text);
+        firebaseAuth = FirebaseAuth.getInstance();
+        //paste=findViewById(R.id.paste);
+/*
+        clipboardManager=(ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+        if(!clipboardManager.hasPrimaryClip()){
+            paste.setEnabled(false);
+        }
+
+
+*/
+        fStore = FirebaseFirestore.getInstance();
+        profile = findViewById(R.id.profile);
+        userID = firebaseAuth.getCurrentUser().getUid();
+        storageReference = FirebaseStorage.getInstance().getReference();
+        drawerLayout=findViewById(R.id.drawer_layout);
+        StorageReference profileRef = storageReference.child("users/"+firebaseAuth.getCurrentUser().getUid()+"profile.jpg");
+        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).into(profile);
+            }
+        });
+        StorageReference profileRef1 = storageReference.child("users/"+firebaseAuth.getCurrentUser().getUid()+"profile.jpg");
+        profileRef1.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).into(profileimg);
+            }
+        });
+
+        DocumentReference documentReference = fStore.collection("users").document(userID);
+        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                name.setText(documentSnapshot.getString("Name"));
+                email.setText(documentSnapshot.getString("Email"));
+            }
+        });
+        DocumentReference documentReference1 = fStore.collection("users").document(userID);
+        documentReference1.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                text.setText(documentSnapshot.getString("Name"));
+            }
+        });
+
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //open gallery
+                Intent openGallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(openGallery,1000);
+            }
+        });
+
+        final TextRecognizer textRecognizer = new TextRecognizer.Builder(getApplicationContext()).build();
+        if (!textRecognizer.isOperational()) {
+            Log.w("ScannerActivity", "Detector dependencies are not yet avaliable");
+        } else {
+            cameraSource = new CameraSource.Builder(getApplicationContext(), textRecognizer)
+                    .setFacing(CameraSource.CAMERA_FACING_BACK)
+                    .setRequestedPreviewSize(1280, 1024)
+                    .setRequestedFps(2.0f)
+                    .setAutoFocusEnabled(true)
+                    .build();
+            camareview.getHolder().addCallback(new SurfaceHolder.Callback() {
+                @Override
+                public void surfaceCreated(@NonNull SurfaceHolder holder) {
+                    try {
+                        if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                            ActivityCompat.requestPermissions(ScannerActivity.this,
+                                    new String[]{Manifest.permission.CAMERA},
+                                    RequestCameraPermissionID);
+                            return;
+                        }
+                        cameraSource.start(camareview.getHolder());
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+                @Override
+                public void surfaceChanged(@NonNull SurfaceHolder holder, int format, int width, int height) {
+
+                }
+
+                @Override
+                public void surfaceDestroyed(@NonNull SurfaceHolder holder) {
+                    cameraSource.stop();
+
+                }
+            });
+            textRecognizer.setProcessor(new Detector.Processor<TextBlock>() {
+                @Override
+                public void release() {
+
+                }
+
+                @Override
+                public void receiveDetections(Detector.Detections<TextBlock> detections) {
+                    final SparseArray<TextBlock> items = detections.getDetectedItems();
+                    if (items.size() != 0) {
+                        textView.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                StringBuilder stringBuilder = new StringBuilder();
+                                for (int i = 0; i < items.size(); ++i) {
+                                    TextBlock item = items.valueAt(i);
+                                    stringBuilder.append(item.getValue());
+                                    stringBuilder.append("\n");
+
+                                }
+
+
+                               textView.setText(stringBuilder.toString());
+
+                            }
+                        });
+                    }
+
+                }
+
+            });
+
+
+            final TextView textView=findViewById(R.id.text);
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String s = textView.getText().toString();
+                    Intent intent = new Intent(ScannerActivity.this, Display.class);
+                    intent.putExtra("", s);
+                    startActivity(intent);
+                    finish();
+
+
+                }
+            });
+
+
+   /*     //Checking whether the app has a permission to use camera
+        if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            //if not given permission than grant the permission
+            requestPermissions(new String[]{Manifest.permission.CAMERA}, 101);
+        }
+        ImageButton fab = findViewById(R.id.fab);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doProcess(v);
+                textView.setText("");
+            }
+        });*/
+            Button logout = findViewById(R.id.logout);
+            logout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    firebaseAuth.signOut();
+                    finish();
+
+                    Intent intent = new Intent(ScannerActivity.this, Login.class);
+                    startActivity(intent);
+
+                    Toast.makeText(ScannerActivity.this, "Logged Out Successfully.", Toast.LENGTH_LONG).show();
+
+                }
+            });/*
+        Button copy=findViewById(R.id.copy) ;
+        copy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String text =textView.getText().toString();
+                if(!text.equals("")){
+                    ClipData clipData=ClipData.newPlainText("text",text);
+                    clipboardManager.setPrimaryClip(clipData);
+                    Toast.makeText(ScannerActivity.this, "Copied.", Toast.LENGTH_LONG).show();
+                    paste.setEnabled(true);
+
+                }
+
+
+
+            }
+        });
+        final Button paste=findViewById(R.id.paste);
+        paste.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ClipboardManager manager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                if (manager != null && manager.getPrimaryClip() != null && manager.getPrimaryClip().getItemCount() > 0) {
+                    paste.setText(manager.getPrimaryClip().getItemAt(0).getText().toString());
+                }
+               // textView.setText(item.getText().toString());
+
+                Intent intent = new Intent(ScannerActivity.this, Display.class);
+                intent.putExtra("", (Parcelable) textView);
+                startActivity(intent);
+
+            }
+        });*/
+
+        }/*
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public void doProcess(View view) {
+        //open the camera  create an Intent object
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, 101);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Bundle bundle = data.getExtras();
+        //from bundle, extract the image
+        Bitmap bitmap = (Bitmap) bundle.get("data");
+        //set image in imageview
+        imageView.setImageBitmap(bitmap);
+        //process the image
+        //create a FirebaseVisionImage object from a Bitmap object
+        FirebaseVisionImage firebaseVisionImage = FirebaseVisionImage.fromBitmap(bitmap);
+        //Get an instance of FirebaseVision
+        FirebaseVision firebaseVision = FirebaseVision.getInstance();
+        // Create an instance of FirebaseVisionTextRecognizer
+        FirebaseVisionTextRecognizer firebaseVisionTextRecognizer = firebaseVision.getOnDeviceTextRecognizer();
+        // Create a task to process the image
+        Task<FirebaseVisionText> task = firebaseVisionTextRecognizer.processImage(firebaseVisionImage);
+        //if task is success
+        task.addOnSuccessListener(new OnSuccessListener<FirebaseVisionText>() {
+            @Override
+            public void onSuccess(FirebaseVisionText firebaseVisionText) {
+
+                String s = firebaseVisionText.getText();
+
+
+                Intent intent = new Intent(ScannerActivity.this, Display.class);
+                intent.putExtra("", s);
+                startActivity(intent);
+
+            }
+        });
+
+        // if task is failure
+        task.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNul9l Exception e) {
+                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }*/
+        Button change=findViewById(R.id.change);
+
+
+
+        change.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final EditText resetPassword = new EditText(v.getContext());
+                final AlertDialog.Builder passwordResetDialog = new AlertDialog.Builder(v.getContext());
+                passwordResetDialog.setTitle("Reset Password ?");
+
+                passwordResetDialog.setView(resetPassword);
+
+                passwordResetDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // extract the email and send reset link
+                        String newPassword = resetPassword.getText().toString();
+                        user.updatePassword(newPassword).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(Profile.this, "Password Reset Successfully.", Toast.LENGTH_SHORT).show();
+                                //    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(Profile.this, "Password Reset Failed.", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+
+                passwordResetDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // close
+                    }
+                });
+
+                passwordResetDialog.create().show();
+
+            }
+        });
+    }
+
+
+
+
+    protected void onActivityResult(int requestCode,int resultCode, @androidx.annotation.Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1000) {
+            if (resultCode == Activity.RESULT_OK) {
+                Uri imageUri = data.getData();
+                //  profile.setImageURI(imageUri);
+                uploadImage(imageUri);
+
+
+
+            }
+        }
+    }
+
+    private void uploadImage(Uri imageUri) {
+        //upload image to firebase
+        final StorageReference fileRef = storageReference.child("users/"+auth.getCurrentUser().getUid()+"profile.jpg");
+        fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Picasso.get().load(uri).into(profile);
+
+                    }
+                });
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(Profile.this,"Fail",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void ClickMenu(View view){
+        //open drawer
+        openDrawer(drawerLayout);
+    }
+
+    public static void  openDrawer(DrawerLayout drawerLayout) {
+        //open drawer layout
+        drawerLayout.openDrawer(GravityCompat.START);
+
+    }
+
+    public void ClickLogo(View view){
+        //close drawer
+        closeDrawer(drawerLayout);
+    }
+
+    public static void closeDrawer(DrawerLayout drawerLayout) {
+        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+            //when drawer is open close it
+            drawerLayout.closeDrawer(GravityCompat.START);
+
+        }
+    }
+    public void ClickHome(View view){
+        //recreate activity
+        redirectActivity(this,ScannerActivity.class);
+
+    }
+    public void ClickDisplay(View view){
+        //recreate activity
+        redirectActivity(this,Display.class);
+
+    }
+    public void Profile(View view){
+        //recreate activity
+        recreate();
+    }
+
+
+    public static void redirectActivity(Activity activity, Class aClass) {
+        //initialized intent
+        Intent intent = new Intent(activity,aClass);
+        //set flag
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        //start activity
+        activity.startActivity(intent);
+
+    }
+
+    public void Logout(View view) {
+        //recreate activity
+        logout(Profile.this,Login.class);
+    }
+    public  void logout(Activity activity,Class aClass){
+
+        auth.signOut();
+        finish();
+
+        Intent intent = new Intent(Profile.this, Login.class);
+        Toast.makeText(Profile.this, "Logged Out Successfully.", Toast.LENGTH_LONG).show();
+        startActivity(intent);
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //close drawer
+        closeDrawer(drawerLayout);
+    }
+
+
+}

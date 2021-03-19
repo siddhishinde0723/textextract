@@ -1,0 +1,898 @@
+Display
+package com.example.textreader;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class Display extends AppCompatActivity {
+    TextView details;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_display);
+        Intent intent = getIntent();
+        String s = intent.getStringExtra("");
+
+        TextView display1 = findViewById(R.id.details);
+
+        display1.setText(""+s);
+
+    }
+}
+
+Login
+package com.example.textreader;
+
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
+
+public class Login extends AppCompatActivity {
+    EditText email, password ;
+
+    // Creating string to hold values.
+    String EmailHolder, PasswordHolder;
+
+    Button Login,SignUP ;
+    // Creating Boolean to hold EditText empty true false value
+    Boolean EditTextEmptyCheck;
+
+    // Creating progress dialog
+    ProgressDialog progressDialog;
+
+    // Creating FirebaseAuth object
+    FirebaseAuth firebaseAuth;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+        // Assign ID's
+        email = (EditText)findViewById(R.id.editText_email);
+        password = (EditText)findViewById(R.id.editText_password);
+
+        Login = (Button)findViewById(R.id.button_login);
+        SignUP = (Button)findViewById(R.id.button_SignUP);
+
+        progressDialog =  new ProgressDialog(Login.this);
+        // Assign FirebaseAuth instance to FirebaseAuth object
+        firebaseAuth = FirebaseAuth.getInstance();
+        if(firebaseAuth.getCurrentUser() != null){
+
+            // Finishing current Login Activity
+            finish();
+
+            Intent intent = new Intent(Login.this, ScannerActivity.class);
+            startActivity(intent);
+        }
+
+        Login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CheckEditTextIsEmptyOrNot();
+                if(EditTextEmptyCheck)
+                {
+                    LoginFunction();
+
+                }
+                else {
+                    Toast.makeText(Login.this, "Please Fill All the Fields", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        Button signup=findViewById(R.id.button_SignUP) ;
+
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                // Opening the Login Activity using Intent
+                Intent intent = new Intent(Login.this, MainActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+    }
+    public void CheckEditTextIsEmptyOrNot(){
+
+        // Getting value form EditText and fill into Holder string variable
+        EmailHolder = email.getText().toString().trim();
+
+        PasswordHolder = password.getText().toString().trim();
+
+        // Checking Both EditText is empty or not
+        if(TextUtils.isEmpty(EmailHolder) || TextUtils.isEmpty(PasswordHolder))
+        {
+            // If any of EditText is empty then set value as false
+            EditTextEmptyCheck = false;
+        }
+        else {
+            // If any of EditText is empty then set value as true
+            EditTextEmptyCheck = true ;
+        }
+
+    }
+    public void LoginFunction(){
+
+        progressDialog.setMessage("Please Wait");
+
+        // Showing progressDialog.
+        progressDialog.show();
+
+        // Calling  signInWithEmailAndPassword buildin  function with firebase object and passing EmailHolder and PasswordHolder inside it
+        firebaseAuth.signInWithEmailAndPassword(EmailHolder, PasswordHolder)
+                .addOnCompleteListener(this, new OnCompleteListener <AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task <AuthResult> task) {
+                        // task  Successful
+                        if(task.isSuccessful()){
+
+                            progressDialog.dismiss();
+                            finish();
+                            Intent intent = new Intent(Login.this, ScannerActivity.class);
+                            startActivity(intent);
+                        }
+                        else {
+                            progressDialog.dismiss();
+                            Toast.makeText(Login.this, "Email or Password Not found, Please Try Again", Toast.LENGTH_LONG).show();
+
+
+                        }
+                    }
+                });
+
+    }
+}
+
+Scanner
+package com.example.textreader;
+
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.os.Build;
+import android.os.Bundle;
+import android.provider.MediaStore;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.ml.vision.FirebaseVision;
+import com.google.firebase.ml.vision.common.FirebaseVisionImage;
+import com.google.firebase.ml.vision.text.FirebaseVisionText;
+import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
+
+
+public class ScannerActivity extends AppCompatActivity {
+
+    ImageView imageView;
+    TextView textView;
+    FirebaseAuth firebaseAuth ;
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_scanner);
+
+        //Assign Id
+        imageView = findViewById(R.id.imageId);
+        textView = findViewById(R.id.textId);
+        firebaseAuth = FirebaseAuth.getInstance();
+
+
+        //Checking whether the app has a permission to use camera
+        if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            //if not given permission than grant the permission
+            requestPermissions(new String[]{Manifest.permission.CAMERA}, 101);
+        }
+        ImageButton fab = findViewById(R.id.fab);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doProcess(v);
+                textView.setText("");
+            }
+        });
+        Button logout=findViewById(R.id.logout) ;
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                firebaseAuth.signOut();
+                finish();
+
+                Intent intent = new Intent(ScannerActivity.this, Login.class);
+                startActivity(intent);
+
+                Toast.makeText(ScannerActivity.this, "Logged Out Successfully.", Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+    }
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public void doProcess(View view) {
+        //open the camera  create an Intent object
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, 101);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Bundle bundle = data.getExtras();
+        //from bundle, extract the image
+        Bitmap bitmap = (Bitmap) bundle.get("data");
+        //set image in imageview
+        imageView.setImageBitmap(bitmap);
+        //process the image
+        //create a FirebaseVisionImage object from a Bitmap object
+        FirebaseVisionImage firebaseVisionImage = FirebaseVisionImage.fromBitmap(bitmap);
+        //Get an instance of FirebaseVision
+        FirebaseVision firebaseVision = FirebaseVision.getInstance();
+        // Create an instance of FirebaseVisionTextRecognizer
+        FirebaseVisionTextRecognizer firebaseVisionTextRecognizer = firebaseVision.getOnDeviceTextRecognizer();
+        // Create a task to process the image
+        Task<FirebaseVisionText> task = firebaseVisionTextRecognizer.processImage(firebaseVisionImage);
+        //if task is success
+        task.addOnSuccessListener(new OnSuccessListener<FirebaseVisionText>() {
+            @Override
+            public void onSuccess(FirebaseVisionText firebaseVisionText) {
+
+                String s = firebaseVisionText.getText();
+
+
+                Intent intent = new Intent(ScannerActivity.this, Display.class);
+                intent.putExtra("", s);
+                startActivity(intent);
+
+            }
+        });
+
+        // if task is failure
+        task.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+
+}
+
+
+Main
+package com.example.textreader;
+
+
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText email, password ;
+    Button SignUp, ButtonGoToLoginActivity;
+
+    // Creating string to hold email and password .
+    String EmailHolder, PasswordHolder ;
+    ProgressDialog progressDialog;
+
+    // Creating FirebaseAuth object.
+    FirebaseAuth firebaseAuth ;
+    Boolean EditTextStatus ;
+    GoogleSignInClient mGoogleSignInClient;
+    private static int RC_SIGN_IN = 1;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Assigning layout email ID and Password ID.
+        email = (EditText)findViewById(R.id.EditText_User_EmailID);
+        password = (EditText)findViewById(R.id.EditText_User_Password);
+
+        // Assign button layout ID.
+        SignUp = (Button)findViewById(R.id.Button_SignUp);
+        ButtonGoToLoginActivity = (Button)findViewById(R.id.Button_LoginActivity);
+
+        // Creating object instance.
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        progressDialog = new ProgressDialog(MainActivity.this);
+
+        // Adding click listener to Sign Up Button.
+        SignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // Calling method to check EditText is empty or no status.
+                CheckEditTextIsEmptyOrNot();
+
+                if(EditTextStatus){
+                    UserRegistrationFunction();
+
+                }
+                // If EditText is false then this block with execute.
+                else {
+
+                    Toast.makeText(MainActivity.this, "Please fill all form fields.", Toast.LENGTH_LONG).show();
+
+                }
+
+            }
+        });
+
+        // Adding click listener to ButtonGoToLoginActivity button.
+        ButtonGoToLoginActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // Finishing current Main Activity.
+                finish();
+
+                // Opening the Login Activity using Intent.
+                Intent intent = new Intent(MainActivity.this, Login.class);
+                startActivity(intent);
+
+            }
+        });
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        SignInButton signInButton = findViewById(R.id.sign_in_button);
+        signInButton.setSize(SignInButton.SIZE_STANDARD);
+
+        signInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signIn();
+
+            }
+        });
+
+
+    }
+
+    // Creating UserRegistrationFunction
+    public void UserRegistrationFunction(){
+
+        // Showing progress dialog at user registration time.
+        progressDialog.setMessage("Please Wait, We are Registering Your Data");
+        progressDialog.show();
+
+        // Creating createUserWithEmailAndPassword method and pass email and password inside it.
+        firebaseAuth.createUserWithEmailAndPassword(EmailHolder, PasswordHolder).
+                addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+
+                        // Checking if user is registered successfully.
+                        if(task.isSuccessful()){
+
+                            // If user registered successfully then show this toast message.
+                            Toast.makeText(MainActivity.this,"User Registration Successfully",Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(getApplicationContext(), Login.class));
+                            firebaseAuth.signOut();
+
+                        }else{
+
+                            // If something goes wrong.
+                            Toast.makeText(MainActivity.this,"Something Went Wrong.",Toast.LENGTH_LONG).show();
+                        }
+
+                        progressDialog.dismiss();
+
+                    }
+                });
+
+    }
+
+    public void CheckEditTextIsEmptyOrNot(){
+
+        // Getting name and email from EditText and save into string variables.
+        EmailHolder = email.getText().toString().trim();
+        PasswordHolder = password.getText().toString().trim();
+
+        if(TextUtils.isEmpty(EmailHolder) || TextUtils.isEmpty(PasswordHolder))
+        {
+
+            EditTextStatus = false;
+
+        }
+        else {
+
+            EditTextStatus = true ;
+        }
+
+    }
+    public void signIn() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RC_SIGN_IN) {
+            //Returns a GoogleSignInAccount present in the result data for the associated Activity started via getSignInIntent()
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+        }
+    }
+    public void handleSignInResult(Task<GoogleSignInAccount> completeTask){
+        try{
+            //Exception to be returned by a Task when a call to Google Play services has failed
+            GoogleSignInAccount account = completeTask.getResult(ApiException.class);
+            //Gets the last account that the user signed in with
+            GoogleSignInAccount acct =GoogleSignIn.getLastSignedInAccount(this);
+            if(acct !=null)
+            {
+                String personName = acct.getDisplayName();
+                String personGivenName = acct.getGivenName();
+                String personFamilyName = acct.getFamilyName();
+                String personEmail = acct.getEmail();
+                String personId = acct.getId();
+                Uri personPhoto =acct.getPhotoUrl();
+
+
+                Toast.makeText(this,"user:"+personEmail,Toast.LENGTH_SHORT).show();
+            }
+
+            startActivity(new Intent(MainActivity.this,ScannerActivity.class));
+
+        }catch(ApiException e){
+            Log.d("signInResult code" ,e.toString());
+
+        }
+    }
+
+}
+
+display.xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout4"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:text="Text Recognizer"
+    android:background="@drawable/images"
+
+    tools:ignore="ExtraText">
+
+    <TextView
+        android:id="@+id/details"
+        android:layout_width="319dp"
+        android:layout_height="693dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:fontFamily="sans-serif"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+
+        android:textColor="@color/yellow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:ignore="MissingConstraints" />
+</RelativeLayout>
+
+
+login.xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/images"
+
+    tools:ignore="ExtraText">
+
+
+    <TextView
+        android:id="@+id/textview1"
+        android:layout_width="match_parent"
+        android:layout_height="97dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="464dp"
+        android:gravity="center"
+        android:text="Login"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/yellow"
+
+        android:textSize="30dp"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/editText_email"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="393dp"
+        android:gravity="center"
+        android:textColor="@color/yellow"
+        android:textColorHint="@color/yellow"
+
+        android:hint="Enter Your Email"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/editText_password"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/yellow"
+        android:textColorHint="@color/yellow"
+
+        android:layout_marginBottom="316dp"
+
+        android:gravity="center"
+        android:hint="Enter Your Password"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/button_login"
+        android:layout_width="129dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="131dp"
+        android:layout_marginLeft="131dp"
+        android:layout_marginBottom="255dp"
+        android:background="@drawable/ic_rect"
+        android:textColor="@color/black"
+        android:text="Login"
+        android:textColorHighlight="#040303"
+        android:textColorLink="#090808"
+        android:textStyle="bold|italic"
+        android:typeface="monospace"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/notlogin"
+        android:layout_width="204dp"
+        android:layout_height="47dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="45dp"
+        android:gravity="center"
+        android:text="Dont have account?"
+
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/button_SignUP"
+        android:layout_width="113dp"
+        android:layout_height="36dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="53dp"
+        android:layout_marginRight="53dp"
+        android:layout_marginBottom="48dp"
+        android:text=" SIGN UP"
+        android:background="@drawable/ic_rect"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:ignore="MissingConstraints" />
+
+
+</RelativeLayout>
+
+main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/images"
+
+
+    >
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="354dp"
+        android:layout_height="84dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="499dp"
+        android:autoText="true"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center"
+        android:text="Registration Form"
+        android:textAllCaps="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:textColor="@color/yellow"
+        android:textSize="30sp"
+        android:textStyle="italic"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="28dp"
+        tools:layout_editor_absoluteY="105dp" />
+
+    <EditText
+        android:id="@+id/EditText_User_EmailID"
+
+        android:layout_width="match_parent"
+        android:layout_height="69dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="393dp"
+        android:gravity="center"
+        android:hint="Enter Your Email Here"
+        android:textColorHint="@color/yellow"
+
+        android:textColor="@color/yellow"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="243dp" />
+
+    <EditText
+        android:id="@+id/EditText_User_Password"
+
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="303dp"
+        android:gravity="center"
+        android:hint="Enter Your Password Here"
+        android:textColorHint="@color/yellow"
+
+        android:inputType="textPassword"
+        android:textColor="@color/yellow"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="366dp" />
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/sign_in_button"
+
+        android:layout_width="39dp"
+        android:layout_height="44dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="235dp"
+        android:layout_marginRight="235dp"
+        android:layout_marginBottom="194dp"
+        android:textColor="@color/yellow"
+
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="59dp"
+        tools:layout_editor_absoluteY="477dp" />
+
+    <Button
+        android:id="@+id/Button_SignUp"
+
+        style="@style/Widget.AppCompat.Button.Colored"
+
+        android:layout_width="118dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="99dp"
+        android:layout_marginRight="99dp"
+        android:layout_marginBottom="188dp"
+        android:background="@drawable/ic_rect"
+        android:textColor="@color/black"
+
+        android:text="Sign Up"
+        android:textAllCaps="false"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="238dp"
+
+        tools:layout_editor_absoluteY="480dp" />
+
+    <TextView
+        android:id="@+id/textsignup"
+
+        android:layout_width="241dp"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="45dp"
+        android:gravity="center"
+        android:text="Already Registered?"
+        android:textColor="@color/white"
+
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="645dp" />
+
+    <Button
+
+        android:id="@+id/Button_LoginActivity"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="140dp"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="625dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginRight="26dp"
+        android:layout_marginBottom="66dp"
+        android:background="@drawable/ic_rect"
+
+        android:text="Login"
+        android:textColor="@color/black"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="258dp"
+        tools:layout_editor_absoluteY="645dp" />
+
+</RelativeLayout>
+
+scanner.xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout3"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:text="Text Recognizer"
+    android:background="@drawable/images"
+
+    tools:ignore="ExtraText">
+
+
+    <ImageView
+        android:id="@+id/imageId"
+        android:layout_width="match_parent"
+        android:layout_height="647dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="84dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textColor="@color/yellow"
+
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textId"
+        android:layout_width="275dp"
+        android:layout_height="33dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/yellow"
+
+        app:layout_constraintRight_toRightOf="parent"
+        tools:ignore="MissingConstraints" />
+
+
+    <ImageButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="end|bottom"
+        android:layout_marginEnd="26dp"
+        android:layout_marginRight="26dp"
+        android:layout_marginBottom="16dp"
+        android:textColor="@color/yellow"
+
+        android:baselineAlignBottom="true"
+        android:contentDescription="@string/submit"
+        android:src="@drawable/ic_baseline_camera_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="156dp"
+        android:layout_height="63dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="224dp"
+        android:layout_marginRight="224dp"
+        android:layout_marginBottom="13dp"
+        android:background="@drawable/ic_rect"
+        android:textColor="@color/black"
+        android:text="Logout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
+
+
+</RelativeLayout>
+
+
+
+
+
+
+
+
+
+

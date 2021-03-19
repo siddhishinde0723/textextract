@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "774826098969",
+    "project_id": "textread-dc0a8",
+    "storage_bucket": "textread-dc0a8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:774826098969:android:945da064a65bcf52aac588",
+        "android_client_info": {
+          "package_name": "com.example.textread"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "774826098969-mcdt9uve3jf2kd7dgq0v3v6l4s1akjd4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.textread",
+            "certificate_hash": "c524ad3878201c43dfbad322159def7914e2e4e2"
+          }
+        },
+        {
+          "client_id": "774826098969-1ap6c3iugur6oa5j1r1kj0igk4tgj7c9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHy4vLdsEJGCX--1St3BcKNGcoE6F50xw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "774826098969-1ap6c3iugur6oa5j1r1kj0igk4tgj7c9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

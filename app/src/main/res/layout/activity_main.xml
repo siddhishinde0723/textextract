@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/images"
+    android:orientation="vertical"
+    android:weightSum="5"
+    android:visibility="visible">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:gravity="center">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:gravity="center"
+        android:text="Registration"
+        android:textAllCaps="false"
+        android:textColor="#D7E171"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5">
+        <EditText
+            android:id="@+id/User_name"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:hint="Enter Your Name Here"
+            android:textColor="#D7E171"
+            android:textColorHint="@color/yellow"
+            tools:ignore="MissingConstraints"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5">
+    <EditText
+        android:id="@+id/User_email"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:hint="Enter Your Email Here"
+        android:textColor="@color/yellow"
+        android:textColorHint="@color/yellow"
+        tools:ignore="MissingConstraints"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5">
+
+    <EditText
+        android:id="@+id/User_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:hint="Enter Your Password Here"
+        android:inputType="textPassword"
+        android:textColor="@color/yellow"
+        android:textColorHint="@color/yellow"
+/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:gravity="center"
+    >
+    <Button
+        android:id="@+id/Button_SignUp"
+
+        style="@style/Widget.AppCompat.Button.Colored"
+
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+
+        android:background="@drawable/ic_rect"
+
+        android:text="Sign Up"
+        android:textAllCaps="false"
+
+        android:textColor="@color/black"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="238dp"
+        tools:layout_editor_absoluteY="480dp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5">
+
+        <TextView
+            android:id="@+id/textsignup"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="176dp"
+            android:layout_marginRight="176dp"
+
+            android:layout_marginBottom="107dp"
+            android:gravity="center"
+            android:text="Already Registered?"
+            android:textColor="@color/white"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="645dp" />
+
+        <Button
+
+            android:id="@+id/Button_LoginActivity"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentEnd="true"
+            android:gravity="center"
+
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="22dp"
+            android:layout_marginRight="22dp"
+            android:layout_marginBottom="94dp"
+            android:background="@drawable/ic_rect"
+            android:text="Login"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="258dp"
+            tools:layout_editor_absoluteY="645dp" />
+    </RelativeLayout>
+
+
+
+</LinearLayout>
