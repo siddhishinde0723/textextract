@@ -5,7 +5,9 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
@@ -79,7 +81,8 @@ public class ScannerActivity extends AppCompatActivity implements NavigationView
     ActionBarDrawerToggle actionBarDrawerToggle;
     private ActionBarDrawerToggle t;
     private NavigationView nv;
-
+    SharedPreferences sharedPreferences;
+    boolean getLoginStatus;
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -106,7 +109,7 @@ public class ScannerActivity extends AppCompatActivity implements NavigationView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scanner);
-      //  session=new Session(this);
+        //  session=new Session(this);
         //Assign Id
         camareview = (SurfaceView) findViewById(R.id.surface_view);
         textView = findViewById(R.id.textdata);
@@ -121,7 +124,6 @@ public class ScannerActivity extends AppCompatActivity implements NavigationView
         storageReference = FirebaseStorage.getInstance().getReference();
         drawerLayout = findViewById(R.id.drawer_layout);
 
-
         //timer
         timer = new Timer();
 
@@ -132,7 +134,11 @@ public class ScannerActivity extends AppCompatActivity implements NavigationView
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_menu);
         navigationView.setNavigationItemSelectedListener(this);
 
-
+        sharedPreferences = getSharedPreferences("googleLogin", Context.MODE_PRIVATE);
+        getLoginStatus = sharedPreferences.getBoolean("googleLogin", false);
+        if(getLoginStatus){
+            navigationView.getMenu().removeItem(R.id.changePass);
+        }
 
 
         /* StorageReference profileRef = storageReference.child("users/"+firebaseAuth.getCurrentUser().getUid()+"profile.jpg");
@@ -518,13 +524,16 @@ public class ScannerActivity extends AppCompatActivity implements NavigationView
 
     public void ClickLogout(View view) {
         //recreate activity
-       // session.setLoggedIn(getApplicationContext(), false);
+        // session.setLoggedIn(getApplicationContext(), false);
 
         logout();
     }
 
     public void logout() {
-      //session.setLoggedin(true);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+        //session.setLoggedin(true);
         firebaseAuth.signOut();
         finish();
 
@@ -555,22 +564,28 @@ public class ScannerActivity extends AppCompatActivity implements NavigationView
             Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show();
             startActivity(intent);
         }
-        if (id == R.id.changePass) {
-            Intent intent = new Intent(ScannerActivity.this, Change_Password.class);
-            Toast.makeText(this, "Change Password", Toast.LENGTH_SHORT).show();
-            startActivity(intent);
+
+        if(!getLoginStatus){
+            if (id == R.id.changePass) {
+                Intent intent = new Intent(ScannerActivity.this, Change_Password.class);
+                Toast.makeText(this, "Change Password", Toast.LENGTH_SHORT).show();
+                startActivity(intent);
+            }
         }
+
         return false;
     }
-/*
+
+    /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.nav_menu, menu);
-        session = new Session(this);
-        if (session.loggedin(getApplicationContext())) {
-            MenuItem items = menu.findItem(R.id.changePass);
-            items.setVisible(false);
-        }
+//        session = new Session(this);
+//        if (session.loggedin(getApplicationContext())) {
+//            MenuItem items = menu.findItem(R.id.changePass);
+//            items.setVisible(false);
+//        }
+
         return false;
     }*/
 }
