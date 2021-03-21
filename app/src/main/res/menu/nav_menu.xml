@@ -18,7 +18,7 @@
 
     <item android:id="@+id/changePass"
         android:title="Change Password"
-        android:visible="false"
+        android:visible="true"
         android:icon="@drawable/ic_changepassword"
         android:textColor="@color/yellow">
 

@@ -4,11 +4,8 @@ package com.example.textread;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.ClipboardManager;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
@@ -22,7 +19,6 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,7 +30,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.google.android.gms.config.proto.Config;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.vision.CameraSource;
@@ -63,13 +58,13 @@ public class ScannerActivity extends AppCompatActivity implements NavigationView
 
     SurfaceView camareview;
     CameraSource cameraSource;
-    TextView textView,text;
+    TextView textView, text;
     FirebaseAuth firebaseAuth;
     final int RequestCameraPermissionID = 1001;
     ClipboardManager clipboardManager;
     Button paste;
     String userID;
-    ImageView profile,profileimg;
+    ImageView profile, profileimg;
     DrawerLayout drawerLayout;
     StorageReference storageReference;
     FirebaseFirestore fStore;
@@ -79,13 +74,11 @@ public class ScannerActivity extends AppCompatActivity implements NavigationView
     Timer timer;
 
     Session sharedPref;
-   // sharedPref = SharedPrefApp.getInstance();
+    // sharedPref = SharedPrefApp.getInstance();
     private Session session;
     ActionBarDrawerToggle actionBarDrawerToggle;
     private ActionBarDrawerToggle t;
     private NavigationView nv;
-
-
 
 
     @Override
@@ -113,31 +106,31 @@ public class ScannerActivity extends AppCompatActivity implements NavigationView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scanner);
-
+      //  session=new Session(this);
         //Assign Id
         camareview = (SurfaceView) findViewById(R.id.surface_view);
         textView = findViewById(R.id.textdata);
         firebaseAuth = FirebaseAuth.getInstance();
         //paste=findViewById(R.id.paste);
-        user=firebaseAuth.getCurrentUser();
+        user = firebaseAuth.getCurrentUser();
         text = findViewById(R.id.text);
         profileimg = findViewById(R.id.profileimg);
         fStore = FirebaseFirestore.getInstance();
         profile = findViewById(R.id.profile);
-  //     userID = Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid();
+        //     userID = Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid();
         storageReference = FirebaseStorage.getInstance().getReference();
-        drawerLayout=findViewById(R.id.drawer_layout);
+        drawerLayout = findViewById(R.id.drawer_layout);
 
 
         //timer
-        timer=new Timer();
+        timer = new Timer();
 
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.Open, R.string.Close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
-            NavigationView navigationView = (NavigationView)findViewById(R.id.nav_menu);
-          navigationView.setNavigationItemSelectedListener(this);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_menu);
+        navigationView.setNavigationItemSelectedListener(this);
 
 
 
@@ -239,8 +232,8 @@ public class ScannerActivity extends AppCompatActivity implements NavigationView
 
                                 }
 
-                              //  cameraSource.stop();
-                               // Toast.makeText(getApplicationContext(),"Ok ready to capture 1...2...3...Click",Toast.LENGTH_SHORT).show();
+                                //  cameraSource.stop();
+                                // Toast.makeText(getApplicationContext(),"Ok ready to capture 1...2...3...Click",Toast.LENGTH_SHORT).show();
 
 
                                /* timer.schedule(new TimerTask() {
@@ -257,7 +250,7 @@ public class ScannerActivity extends AppCompatActivity implements NavigationView
                                         }
                                     },3000);*/
 
-                                Toast.makeText(getApplicationContext(),"Ok ready to capture",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Ok ready to capture", Toast.LENGTH_SHORT).show();
                                 cameraSource.stop();
                                 String s = textView.getText().toString();
                                 // cameraSource.stop();
@@ -405,7 +398,7 @@ public class ScannerActivity extends AppCompatActivity implements NavigationView
 
     }
 
-    protected void onActivityResult(int requestCode,int resultCode, @androidx.annotation.Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @androidx.annotation.Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 1000) {
@@ -415,14 +408,13 @@ public class ScannerActivity extends AppCompatActivity implements NavigationView
                 uploadImage(imageUri);
 
 
-
             }
         }
     }
 
     private void uploadImage(Uri imageUri) {
         //upload image to firebase
-        final StorageReference fileRef = storageReference.child("users/"+firebaseAuth.getCurrentUser().getUid()+"profile.jpg");
+        final StorageReference fileRef = storageReference.child("users/" + firebaseAuth.getCurrentUser().getUid() + "profile.jpg");
         fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -438,29 +430,29 @@ public class ScannerActivity extends AppCompatActivity implements NavigationView
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(ScannerActivity.this,"Fail",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ScannerActivity.this, "Fail", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    public void ClickMenu(View view){
+    public void ClickMenu(View view) {
         //open drawer
         openDrawer(drawerLayout);
     }
 
-    public static void  openDrawer(DrawerLayout drawerLayout) {
+    public static void openDrawer(DrawerLayout drawerLayout) {
         //open drawer layout
         drawerLayout.openDrawer(GravityCompat.START);
 
     }
 
-    public void ClickLogo(View view){
+    public void ClickLogo(View view) {
         //close drawer
         closeDrawer(drawerLayout);
     }
 
     public static void closeDrawer(DrawerLayout drawerLayout) {
-        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             //when drawer is open close it
             drawerLayout.closeDrawer(GravityCompat.START);
 
@@ -524,16 +516,16 @@ public class ScannerActivity extends AppCompatActivity implements NavigationView
 */
 
 
-
-
-
     public void ClickLogout(View view) {
         //recreate activity
+       // session.setLoggedIn(getApplicationContext(), false);
+
         logout();
     }
-    public  void logout(){
-//        session.setLoggedin(false);
-        // firebaseAuth.signOut();
+
+    public void logout() {
+      //session.setLoggedin(true);
+        firebaseAuth.signOut();
         finish();
 
         Intent intent = new Intent(ScannerActivity.this, Login.class);
@@ -554,31 +546,32 @@ public class ScannerActivity extends AppCompatActivity implements NavigationView
 
         int id = item.getItemId();
         if (id == R.id.camera) {
-            Intent intent = new Intent(ScannerActivity.this,ScannerActivity.class);
-            Toast.makeText(this, "Capture Image", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(ScannerActivity.this, ScannerActivity.class);
+            Toast.makeText(this, "Scan Image", Toast.LENGTH_SHORT).show();
             startActivity(intent);
         }
         if (id == R.id.profile) {
-            Intent intent = new Intent(ScannerActivity.this,Profile.class);
+            Intent intent = new Intent(ScannerActivity.this, Profile.class);
             Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show();
             startActivity(intent);
         }
         if (id == R.id.changePass) {
-            Intent intent = new Intent(ScannerActivity.this,Change_Password.class);
-            Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(ScannerActivity.this, Change_Password.class);
+            Toast.makeText(this, "Change Password", Toast.LENGTH_SHORT).show();
             startActivity(intent);
         }
         return false;
     }
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.nav_menu,menu);
-        session=new Session(this);
-        if(session.loggedin()){
+        getMenuInflater().inflate(R.menu.nav_menu, menu);
+        session = new Session(this);
+        if (session.loggedin(getApplicationContext())) {
             MenuItem items = menu.findItem(R.id.changePass);
             items.setVisible(false);
         }
-
-        return true;
-    }
+        return false;
+    }*/
 }
+

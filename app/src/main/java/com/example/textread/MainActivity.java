@@ -1,7 +1,4 @@
 package com.example.textread;
-
-
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -28,10 +25,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class  MainActivity extends AppCompatActivity{
+public class      MainActivity extends AppCompatActivity {
 
     EditText email, password,name ;
-    Button reg,login;
+    Button SignUp,login;
     String userID;
     // Creating string to hold email and password .
     String EmailHolder, PasswordHolder,NameHolder ;
@@ -40,58 +37,93 @@ public class  MainActivity extends AppCompatActivity{
     // Creating FirebaseAuth object.
     FirebaseAuth firebaseAuth ;
     FirebaseFirestore firestore;
-    DbHelper db;
     private static final String TAG = "Login";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        db = new DbHelper(this);
-        reg = findViewById(R.id.Button_SignUp);
-        login = (Button)findViewById(R.id.Button_LoginActivity);
+        // Assigning layout email ID and Password ID.
+        name=(EditText)findViewById(R.id.User_name);
         email = (EditText)findViewById(R.id.User_email);
         password = (EditText)findViewById(R.id.User_password);
-        name = findViewById(R.id.User_name);
-        //reg.setOnClickListener(this);
-       // login.setOnClickListener(this);
 
+        // Assign button layout ID.
+        SignUp = (Button)findViewById(R.id.Button_SignUp);
 
+        // Creating object instance.
+        firebaseAuth = FirebaseAuth.getInstance();
+        firestore =FirebaseFirestore.getInstance();
+        progressDialog = new ProgressDialog(MainActivity.this);
 
-        reg.setOnClickListener(new View.OnClickListener() {
+        // Adding click listener to Sign Up Button.
+        SignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String Name = name.getText().toString();
-                String Email = email.getText().toString();
-                String pass = password.getText().toString();
-                if(Email.isEmpty() && pass.isEmpty()){
-                    displayToast("Username/password field empty");
-                }else{
-                    db.addUser(Name,Email,pass);
-                    displayToast("User registered");
-                    finish();
+                NameHolder = name.getText().toString().trim();
+                EmailHolder = email.getText().toString().trim();
+                PasswordHolder= password.getText().toString().trim();
+
+                if (TextUtils.isEmpty(NameHolder)) {
+                    name.setError("Enter Your Name");
+                    return;
                 }
+                if (TextUtils.isEmpty(EmailHolder)) {
+                    email.setError("Email is Required.");
+                    return;
+                }
+                if (TextUtils.isEmpty(PasswordHolder)) {
+                    password.setError("Password is Required.");
+                    return;
+                }
+                // register the user in firebase
+
+                firebaseAuth.createUserWithEmailAndPassword(EmailHolder, PasswordHolder)
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                                if (task.isSuccessful()) {
+
+                                    Toast.makeText(MainActivity.this, "Register Successfully", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(getApplicationContext(), Login.class));
+                                    userID = firebaseAuth.getCurrentUser().getUid();
+                                    DocumentReference documentReference = firestore.collection("users").document(userID);
+                                    Map<String,Object> user = new HashMap<>();
+                                    user.put("Name",NameHolder);
+                                    user.put("Email",EmailHolder);
+                                    documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Log.d(TAG,"Data is added"+userID);
+
+                                        }
+                                    });
+                                    startActivity(new Intent(getApplicationContext(), Login.class));
+                                }
+
+                                else {
+                                    Toast.makeText(MainActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        });
+
             }
         });
+
+        Button login=findViewById(R.id.Button_LoginActivity);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Login.class);
 
+                Intent intent = new Intent(MainActivity.this, Login.class);
                 startActivity(intent);
+                finish();
+
 
             }
         });
-
-    }
-
-
-
-    private void register(){
-
-    }
-
-    private void displayToast(String message){
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 }
+

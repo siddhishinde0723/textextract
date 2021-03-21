@@ -3,8 +3,6 @@ package com.example.textread;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,7 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -32,11 +29,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -95,7 +88,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 */  actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.Open, R.string.Close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         NavigationView navigationView = (NavigationView)findViewById(R.id.nav_menu);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -270,7 +263,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         logout();
     }
     public  void logout(){
-
+      //  session.setLoggedin(false);
         auth.signOut();
         finish();
 
@@ -290,7 +283,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         int id = item.getItemId();
         if (id == R.id.camera) {
             Intent intent = new Intent(Profile.this,ScannerActivity.class);
-            Toast.makeText(this, "Capture Image", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Scan Image", Toast.LENGTH_SHORT).show();
             startActivity(intent);
         }
         if (id == R.id.profile) {
@@ -300,25 +293,25 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         }
         if (id == R.id.changePass) {
             Intent intent = new Intent(Profile.this,Change_Password.class);
-            Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Change Password", Toast.LENGTH_SHORT).show();
             startActivity(intent);
         }
 
 
 
         return false;
-    }
+    }/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.nav_menu,menu);
         session=new Session(this);
-        if(session.loggedin()){
+        if(session.loggedin(getApplicationContext())){
             MenuItem items = menu.findItem(R.id.changePass);
             items.setVisible(false);
         }
 
         return true;
-    }
+    }*/
 
 
 }

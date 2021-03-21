@@ -12,7 +12,7 @@
     <LinearLayout
         android:layout_width="20dp"
         android:layout_height="wrap_content"
-        >
+        android:orientation="vertical">
         <ImageView
             android:id="@+id/profileimg"
             android:layout_width="match_parent"
@@ -20,14 +20,8 @@
             android:layout_margin="16dp"
             android:onClick="ClickLogo"
             android:visibility="visible"
+            android:background="@drawable/images"
             android:src="@drawable/logo"/>
-    </LinearLayout>
-
-
-
-
-
-
 
     <com.google.android.material.navigation.NavigationView
         android:layout_width="match_parent"
@@ -39,5 +33,5 @@
         app:itemIconTint="@color/white"
         app:menu="@menu/nav_menu"/>
 
-
+    </LinearLayout>
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -88,6 +88,7 @@ public class Display extends AppCompatActivity implements NavigationView.OnNavig
         String s = intent.getStringExtra("");
         display1.setText(" " + s);
 
+       // session=new Session(this);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.Open, R.string.Close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
@@ -353,7 +354,7 @@ public class Display extends AppCompatActivity implements NavigationView.OnNavig
         logout();
     }
     public  void logout(){
-
+     //   session.setLoggedin(false);
         auth.signOut();
         finish();
 
@@ -402,7 +403,7 @@ public class Display extends AppCompatActivity implements NavigationView.OnNavig
         int id = item.getItemId();
         if (id == R.id.camera) {
             Intent intent = new Intent(Display.this,ScannerActivity.class);
-            Toast.makeText(this, "Capture Image", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Scan Image", Toast.LENGTH_SHORT).show();
             startActivity(intent);
         }
         if (id == R.id.profile) {
@@ -412,24 +413,24 @@ public class Display extends AppCompatActivity implements NavigationView.OnNavig
         }
         if (id == R.id.changePass) {
             Intent intent = new Intent(Display.this,Change_Password.class);
-            Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Change Password", Toast.LENGTH_SHORT).show();
             startActivity(intent);
         }
 
 
 
         return false;
-    }
+    }/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.nav_menu,menu);
         session=new Session(this);
-        if(session.loggedin()){
+        if(session.loggedin(getApplicationContext())){
             MenuItem items = menu.findItem(R.id.changePass);
             items.setVisible(false);
         }
 
         return true;
-    }
+    }*/
 
 }
