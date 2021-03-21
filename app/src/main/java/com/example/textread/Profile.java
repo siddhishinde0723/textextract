@@ -3,7 +3,9 @@ package com.example.textread;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -91,7 +93,11 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         NavigationView navigationView = (NavigationView)findViewById(R.id.nav_menu);
         navigationView.setNavigationItemSelectedListener(this);
-
+        SharedPreferences sharedPreferences = getSharedPreferences("googleLogin", Context.MODE_PRIVATE);
+        boolean getLoginStatus = sharedPreferences.getBoolean("googleLogin", false);
+        if(getLoginStatus){
+            navigationView.getMenu().removeItem(R.id.changePass);
+        }
 
 
 
