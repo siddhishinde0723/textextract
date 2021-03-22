@@ -1,5 +1,6 @@
 package com.example.textread;
 
+
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.ComponentName;
@@ -42,6 +43,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 public class Login extends AppCompatActivity {
     EditText email, password;
+    boolean status=false;
 
     // Creating string to hold values.
     String EmailHolder, PasswordHolder;
@@ -75,12 +77,12 @@ public class Login extends AppCompatActivity {
         //session = new Session(this);
         // final TextView changePass=findViewById(R.id.changePass);
 
-       // session=new Session(this);
+        // session=new Session(this);
 
         progressDialog = new ProgressDialog(Login.this);
         // Assign FirebaseAuth instance to FirebaseAuth object
         firebaseAuth = FirebaseAuth.getInstance();
-       // session.setLoggedin(true);
+        // session.setLoggedin(true);
         if (firebaseAuth.getCurrentUser() != null) {
 
             // Finishing current Login Activity
@@ -90,7 +92,8 @@ public class Login extends AppCompatActivity {
             startActivity(intent);
 
         }
-       // SharedPreferences mPrefs = getSharedPreferences("myAppPrefs", Context.MODE_PRIVATE);
+        // SharedPreferences mPrefs = getSharedPreferences("myAppPrefs", Context.MODE_PRIVATE);
+
       /*  if(session.getLoggedStatus(getApplicationContext())) {
             Intent intent = new Intent(getApplicationContext(), ScannerActivity.class);
             startActivity(intent);
@@ -103,9 +106,9 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                  // For set user loggedin status
-               // IsLoggedIn=true;
-               // session.save(null,"",true);
+                // For set user loggedin status
+                // IsLoggedIn=true;
+                // session.save(null,"",true);
 
                 CheckEditTextIsEmptyOrNot();
                 if (EditTextEmptyCheck) {
@@ -272,6 +275,7 @@ public class Login extends AppCompatActivity {
 
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> signInTask = GoogleSignIn.getSignedInAccountFromIntent(data);
+            status=true;
             try {
                 GoogleSignInAccount signInAcc = signInTask.getResult(ApiException.class);
 
@@ -281,12 +285,12 @@ public class Login extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Toast.makeText(getApplicationContext(), "Logged in Successfully", Toast.LENGTH_SHORT).show();
 
+
+
                         startActivity(new Intent(getApplicationContext(), ScannerActivity.class));
                        /* SharedPrefApp sharedPref;
                         sharedPref = SharedPrefApp.getInstance();
-
                         sharedPref.saveISLogged_IN(this, true);
-
                         TextView changePass= (TextView) findViewById(R.id.changePass);
                         changePass.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -296,7 +300,6 @@ public class Login extends AppCompatActivity {
                                         PackageManager.COMPONENT_ENABLED_STATE_DISABLED,0);*
                                 Toast.makeText(getApplicationContext(),"Cannot change password as it is google login ",Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(getApplicationContext(),ScannerActivity.class));
-
                             }
                         });*/
 
@@ -317,5 +320,4 @@ public class Login extends AppCompatActivity {
     }
 
 }
-
 

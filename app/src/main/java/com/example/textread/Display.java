@@ -61,13 +61,14 @@ public class Display extends AppCompatActivity implements NavigationView.OnNavig
     ActionBarDrawerToggle actionBarDrawerToggle;
     private ActionBarDrawerToggle t;
     private NavigationView nv;
-
+    Login status;
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display);
+        status=new Login();
         text = findViewById(R.id.text);
         drawerLayout = findViewById(R.id.drawer_layout);
         profileimg = findViewById(R.id.profileimg);
@@ -420,17 +421,18 @@ public class Display extends AppCompatActivity implements NavigationView.OnNavig
 
 
         return false;
-    }/*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    } public boolean onCreateOptionsMenu(Menu menu) {
+        if(status.status == true){
+            getMenuInflater().inflate(R.menu.nav_gmenu,menu);
+        }
         getMenuInflater().inflate(R.menu.nav_menu,menu);
-        session=new Session(this);
-        if(session.loggedin(getApplicationContext())){
+        /*session=new Session();
+        if(session.loggedin()){
             MenuItem items = menu.findItem(R.id.changePass);
             items.setVisible(false);
         }
-
+*/
         return true;
-    }*/
+    }
 
 }

@@ -52,12 +52,14 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     private ActionBarDrawerToggle t;
     private NavigationView nv;
     Session session;
+    Login status;
 
     @SuppressLint({"SetTextI18n", "CheckResult", "CutPasteId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        status=new Login();
         name = findViewById(R.id.name);
         text = findViewById(R.id.text);
         // change=findViewById(R.id.change);
@@ -300,18 +302,19 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
 
         return false;
-    }/*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    } public boolean onCreateOptionsMenu(Menu menu) {
+        if(status.status == true){
+            getMenuInflater().inflate(R.menu.nav_gmenu,menu);
+        }
         getMenuInflater().inflate(R.menu.nav_menu,menu);
-        session=new Session(this);
-        if(session.loggedin(getApplicationContext())){
+        /*session=new Session();
+        if(session.loggedin()){
             MenuItem items = menu.findItem(R.id.changePass);
             items.setVisible(false);
         }
-
+*/
         return true;
-    }*/
+    }
 
 
 }
