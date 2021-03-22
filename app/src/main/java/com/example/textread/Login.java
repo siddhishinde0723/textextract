@@ -221,10 +221,9 @@ public class Login extends AppCompatActivity {
                             //session.setLoggedIn(getApplicationContext(), true);
 
                             progressDialog.dismiss();
-                            finish();
                             Intent intent = new Intent(Login.this, ScannerActivity.class);
-
                             startActivity(intent);
+                            finish();
 
                         } else {
                             progressDialog.dismiss();
@@ -239,14 +238,16 @@ public class Login extends AppCompatActivity {
 
     public void signIn() {
 
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-
-        startActivityForResult(signInIntent, RC_SIGN_IN);
-
         SharedPreferences sharedPreferences = getSharedPreferences("googleLogin", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("googleLogin", true);
         editor.apply();
+
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+
+
 
     }
 
