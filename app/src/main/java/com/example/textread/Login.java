@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.se.omapi.Session;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
@@ -43,7 +44,6 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 public class Login extends AppCompatActivity {
     EditText email, password;
-    boolean status=false;
 
     // Creating string to hold values.
     String EmailHolder, PasswordHolder;
@@ -93,7 +93,6 @@ public class Login extends AppCompatActivity {
 
         }
         // SharedPreferences mPrefs = getSharedPreferences("myAppPrefs", Context.MODE_PRIVATE);
-
       /*  if(session.getLoggedStatus(getApplicationContext())) {
             Intent intent = new Intent(getApplicationContext(), ScannerActivity.class);
             startActivity(intent);
@@ -174,13 +173,8 @@ public class Login extends AppCompatActivity {
 
         signInButton.setOnClickListener(new View.OnClickListener() {
 
-            //     private static final boolean IS_LOGIN =true ;
-            // private boolean isChecked = true;
-
             @Override
             public void onClick(View v) {
-
-
 
                 signIn();
 
@@ -190,20 +184,7 @@ public class Login extends AppCompatActivity {
 
     }
 
-    private void checkLogin() {
-        if (IsLoggedIn = true) {
-            LinearLayout linearlayout = (LinearLayout) findViewById(R.id.changePass);
-            linearlayout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(getApplicationContext(), "Cannot change password as it is google login ", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(getApplicationContext(), ScannerActivity.class));
-                }
 
-            });
-
-        }
-    }
 
     public void CheckEditTextIsEmptyOrNot() {
 
@@ -275,7 +256,6 @@ public class Login extends AppCompatActivity {
 
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> signInTask = GoogleSignIn.getSignedInAccountFromIntent(data);
-            status=true;
             try {
                 GoogleSignInAccount signInAcc = signInTask.getResult(ApiException.class);
 
@@ -285,23 +265,8 @@ public class Login extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Toast.makeText(getApplicationContext(), "Logged in Successfully", Toast.LENGTH_SHORT).show();
 
-
-
                         startActivity(new Intent(getApplicationContext(), ScannerActivity.class));
-                       /* SharedPrefApp sharedPref;
-                        sharedPref = SharedPrefApp.getInstance();
-                        sharedPref.saveISLogged_IN(this, true);
-                        TextView changePass= (TextView) findViewById(R.id.changePass);
-                        changePass.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                               /* PackageManager pm = getPackageManager();
-                                pm.setComponentEnabledSetting(new ComponentName(Login.this,ChangePassword.class),
-                                        PackageManager.COMPONENT_ENABLED_STATE_DISABLED,0);*
-                                Toast.makeText(getApplicationContext(),"Cannot change password as it is google login ",Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(getApplicationContext(),ScannerActivity.class));
-                            }
-                        });*/
+
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {

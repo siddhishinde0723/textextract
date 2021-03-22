@@ -4,8 +4,10 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
@@ -57,11 +59,13 @@ public class Display extends AppCompatActivity implements NavigationView.OnNavig
     FirebaseUser user;
     Spinner chlanguage;
     FirebaseTranslator translator;
-    Session session;
+   // Session session;
+    SharedPreferences sharedPreferences;
     ActionBarDrawerToggle actionBarDrawerToggle;
     private ActionBarDrawerToggle t;
     private NavigationView nv;
     Login status;
+    boolean getLoginStatus;
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @SuppressLint("SetTextI18n")
     @Override
@@ -93,9 +97,15 @@ public class Display extends AppCompatActivity implements NavigationView.OnNavig
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.Open, R.string.Close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         NavigationView navigationView = (NavigationView)findViewById(R.id.nav_menu);
         navigationView.setNavigationItemSelectedListener(this);
+        sharedPreferences = getSharedPreferences("googleLogin", Context.MODE_PRIVATE);
+        getLoginStatus = sharedPreferences.getBoolean("googleLogin", false);
+        if(getLoginStatus){
+            navigationView.getMenu().removeItem(R.id.changePass);
+        }
+
        /* session=new Session(this);
         if(!session.loggedin()){
             MenuItem menu =(MenuItem)findViewById(R.id.changePass);
@@ -355,10 +365,13 @@ public class Display extends AppCompatActivity implements NavigationView.OnNavig
         logout();
     }
     public  void logout(){
-     //   session.setLoggedin(false);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+        //session.setLoggedin(true);
+
         auth.signOut();
         finish();
-
         Intent intent = new Intent(Display.this, Login.class);
         Toast.makeText(Display.this, "Logged Out Successfully.", Toast.LENGTH_LONG).show();
         startActivity(intent);
@@ -401,38 +414,28 @@ public class Display extends AppCompatActivity implements NavigationView.OnNavig
         });
     }
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
         int id = item.getItemId();
         if (id == R.id.camera) {
-            Intent intent = new Intent(Display.this,ScannerActivity.class);
+            Intent intent = new Intent(Display.this, ScannerActivity.class);
             Toast.makeText(this, "Scan Image", Toast.LENGTH_SHORT).show();
             startActivity(intent);
         }
         if (id == R.id.profile) {
-            Intent intent = new Intent(Display.this,Profile.class);
+            Intent intent = new Intent(Display.this, Profile.class);
             Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show();
             startActivity(intent);
         }
-        if (id == R.id.changePass) {
-            Intent intent = new Intent(Display.this,Change_Password.class);
-            Toast.makeText(this, "Change Password", Toast.LENGTH_SHORT).show();
-            startActivity(intent);
-        }
 
+      //  if(!getLoginStatus){
+            if (id == R.id.changePass) {
+                Intent intent = new Intent(Display.this, Change_Password.class);
+                Toast.makeText(this, "Change Password", Toast.LENGTH_SHORT).show();
+                startActivity(intent);
+            }
 
 
         return false;
-    } public boolean onCreateOptionsMenu(Menu menu) {
-        if(status.status == true){
-            getMenuInflater().inflate(R.menu.nav_gmenu,menu);
-        }
-        getMenuInflater().inflate(R.menu.nav_menu,menu);
-        /*session=new Session();
-        if(session.loggedin()){
-            MenuItem items = menu.findItem(R.id.changePass);
-            items.setVisible(false);
-        }
-*/
-        return true;
     }
 
 }
