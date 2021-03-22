@@ -3,8 +3,9 @@ package com.example.textread;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -17,11 +18,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -30,7 +34,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -52,15 +60,16 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     ActionBarDrawerToggle actionBarDrawerToggle;
     private ActionBarDrawerToggle t;
     private NavigationView nv;
-    Session session;
-    Login status;
+   // Session session;
+    SharedPreferences sharedPreferences;
+    boolean getLoginStatus;
 
     @SuppressLint({"SetTextI18n", "CheckResult", "CutPasteId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        status=new Login();
+
         name = findViewById(R.id.name);
         text = findViewById(R.id.text);
         // change=findViewById(R.id.change);
@@ -72,47 +81,38 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         fStore = FirebaseFirestore.getInstance();
         profile = findViewById(R.id.profile);
         linearLayout = findViewById(R.id.click);
-//        userID = auth.getCurrentUser().getUid();
-   //     user = auth.getCurrentUser();
+        userID = auth.getCurrentUser().getUid();
+        user = auth.getCurrentUser();
 
         storageReference = FirebaseStorage.getInstance().getReference();
         drawerLayout = findViewById(R.id.drawer_layout);
 
-     /*   GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(Profile.this);
+    GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(Profile.this);
         if(acct!=null) {
             Glide.with(this)
                     .load(user.getPhotoUrl())
                     .into(profile);
             name1.setText(user.getDisplayName());
             email1.setText(user.getEmail());
-            profile1.setVisibility(View.INVISIBLE);
+
 
         }
-*/  actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.Open, R.string.Close);
+  actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.Open, R.string.Close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         NavigationView navigationView = (NavigationView)findViewById(R.id.nav_menu);
         navigationView.setNavigationItemSelectedListener(this);
 
+        sharedPreferences = getSharedPreferences("googleLogin", Context.MODE_PRIVATE);
+        getLoginStatus = sharedPreferences.getBoolean("googleLogin", false);
+        if(getLoginStatus){
+            navigationView.getMenu().removeItem(R.id.changePass);
+            profile1.setVisibility(View.INVISIBLE);
+        }
 
 
 
-/*        StorageReference profileRef = storageReference.child("users/" + auth.getCurrentUser().getUid() + "profile.jpg");
-        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Picasso.get().load(uri).into(profile1);
-
-            }
-        });
-*/
-        linearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                profile1.setVisibility(View.VISIBLE);
-            }
-        });
         profile1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,7 +121,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 startActivityForResult(openGallery, 1000);
             }
         });
-/*
+
         DocumentReference documentReference1 = fStore.collection("users").document(userID);
         documentReference1.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
             @Override
@@ -131,7 +131,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 email.setText(documentSnapshot.getString("Email"));
 
             }
-        });
+        });/*
         DocumentReference documentReference = fStore.collection("users").document(userID);
         documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
             @Override
@@ -267,6 +267,9 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     }
     public  void logout(){
       //  session.setLoggedin(false);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
         auth.signOut();
         finish();
 
@@ -283,39 +286,30 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         closeDrawer(drawerLayout);
     }
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
         int id = item.getItemId();
         if (id == R.id.camera) {
-            Intent intent = new Intent(Profile.this,ScannerActivity.class);
+            Intent intent = new Intent(Profile.this, ScannerActivity.class);
             Toast.makeText(this, "Scan Image", Toast.LENGTH_SHORT).show();
             startActivity(intent);
         }
         if (id == R.id.profile) {
-            Intent intent = new Intent(Profile.this,Profile.class);
+            Intent intent = new Intent(Profile.this, Profile.class);
             Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show();
             startActivity(intent);
         }
+
+        //  if(!getLoginStatus){
         if (id == R.id.changePass) {
-            Intent intent = new Intent(Profile.this,Change_Password.class);
+            Intent intent = new Intent(Profile.this, Change_Password.class);
             Toast.makeText(this, "Change Password", Toast.LENGTH_SHORT).show();
             startActivity(intent);
         }
 
 
-
         return false;
-    } public boolean onCreateOptionsMenu(Menu menu) {
-        if(status.status == true){
-            getMenuInflater().inflate(R.menu.nav_gmenu,menu);
-        }
-        getMenuInflater().inflate(R.menu.nav_menu,menu);
-        /*session=new Session();
-        if(session.loggedin()){
-            MenuItem items = menu.findItem(R.id.changePass);
-            items.setVisible(false);
-        }
-*/
-        return true;
     }
+
 
 
 }

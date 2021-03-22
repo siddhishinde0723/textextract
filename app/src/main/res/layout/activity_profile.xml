@@ -39,6 +39,7 @@
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="54dp"
                 android:clickable="false"
+                android:visibility="invisible"
                 android:onClick="ClickLogo"
                 />
 
@@ -57,6 +58,7 @@
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="54dp"
                 android:onClick="ClickLogo"
+                android:visibility="visible"
                 android:src="@drawable/ic_profile" />
 
 
