@@ -120,7 +120,7 @@ public class ScannerActivity extends AppCompatActivity implements NavigationView
         profileimg = findViewById(R.id.profileimg);
         fStore = FirebaseFirestore.getInstance();
         profile = findViewById(R.id.profile);
-        //     userID = Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid();
+        //userID = Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid();
         storageReference = FirebaseStorage.getInstance().getReference();
         drawerLayout = findViewById(R.id.drawer_layout);
 

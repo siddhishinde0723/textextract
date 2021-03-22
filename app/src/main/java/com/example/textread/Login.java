@@ -1,6 +1,7 @@
 package com.example.textread;
 
 
+
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.ComponentName;
@@ -286,4 +287,3 @@ public class Login extends AppCompatActivity {
     }
 
 }
-
