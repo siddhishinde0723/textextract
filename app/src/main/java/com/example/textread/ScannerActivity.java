@@ -5,7 +5,9 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
@@ -73,13 +75,14 @@ public class ScannerActivity extends AppCompatActivity implements NavigationView
     //final int SECONDS_BETWEEN_PHOTOS =900 ;
     Timer timer;
 
-    Session sharedPref;
+    //Session sharedPref;
     // sharedPref = SharedPrefApp.getInstance();
-    private Session session;
+    //private Session session;
     ActionBarDrawerToggle actionBarDrawerToggle;
     private ActionBarDrawerToggle t;
     private NavigationView nv;
-
+    boolean getLoginStatus;
+    SharedPreferences sharedPreferences;
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -132,6 +135,12 @@ public class ScannerActivity extends AppCompatActivity implements NavigationView
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_menu);
         navigationView.setNavigationItemSelectedListener(this);
 
+
+    sharedPreferences=getSharedPreferences("googleLogin", Context.MODE_PRIVATE);
+    getLoginStatus=sharedPreferences.getBoolean("googleLogin",false);
+    if(getLoginStatus){
+        navigationView.getMenu().removeItem(R.id.changePass);
+    }
 
 
 
@@ -525,6 +534,9 @@ public class ScannerActivity extends AppCompatActivity implements NavigationView
 
     public void logout() {
       //session.setLoggedin(true);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
         firebaseAuth.signOut();
         finish();
 
@@ -555,10 +567,12 @@ public class ScannerActivity extends AppCompatActivity implements NavigationView
             Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show();
             startActivity(intent);
         }
-        if (id == R.id.changePass) {
-            Intent intent = new Intent(ScannerActivity.this, Change_Password.class);
-            Toast.makeText(this, "Change Password", Toast.LENGTH_SHORT).show();
-            startActivity(intent);
+        if(!getLoginStatus) {
+            if (id == R.id.changePass) {
+                Intent intent = new Intent(ScannerActivity.this, Change_Password.class);
+                Toast.makeText(this, "Change Password", Toast.LENGTH_SHORT).show();
+                startActivity(intent);
+            }
         }
         return false;
     }
