@@ -12,6 +12,14 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.se.omapi.Session;
+
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
@@ -28,6 +36,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -39,8 +49,12 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+
+import java.util.Arrays;
 
 
 public class Login extends AppCompatActivity {
@@ -49,12 +63,13 @@ public class Login extends AppCompatActivity {
     // Creating string to hold values.
     String EmailHolder, PasswordHolder;
 
-    Button Login, SignUP, ButtonGoToLoginActivity;
+    Button Login, SignUP, ButtonGoToLoginActivity,sign_facebook;
     // Creating Boolean to hold EditText empty true false value
     Boolean EditTextEmptyCheck,IsLoggedIn=false;
 
     // Creating progress dialog
     ProgressDialog progressDialog;
+    CallbackManager mCallbackManager;
 
     // Creating FirebaseAuth object
     FirebaseAuth firebaseAuth;
@@ -83,6 +98,18 @@ public class Login extends AppCompatActivity {
         progressDialog = new ProgressDialog(Login.this);
         // Assign FirebaseAuth instance to FirebaseAuth object
         firebaseAuth = FirebaseAuth.getInstance();
+        FacebookSdk.sdkInitialize(Login.this);
+
+        // Initialize Facebook Login button
+        mCallbackManager = CallbackManager.Factory.create();
+        sign_facebook= findViewById(R.id.login_facbook);
+        sign_facebook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                facelogin();
+            }
+        });
+
         // session.setLoggedin(true);
         if (firebaseAuth.getCurrentUser() != null) {
 
@@ -93,22 +120,13 @@ public class Login extends AppCompatActivity {
             startActivity(intent);
 
         }
-        // SharedPreferences mPrefs = getSharedPreferences("myAppPrefs", Context.MODE_PRIVATE);
-      /*  if(session.getLoggedStatus(getApplicationContext())) {
-            Intent intent = new Intent(getApplicationContext(), ScannerActivity.class);
-            startActivity(intent);
-        } else {
-            MenuItem menu=(MenuItem) findViewById(R.id.changePass);
-            menu.setVisible(true);
-        }*/
+
 
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                // For set user loggedin status
-                // IsLoggedIn=true;
-                // session.save(null,"",true);
+
 
                 CheckEditTextIsEmptyOrNot();
                 if (EditTextEmptyCheck) {
@@ -184,8 +202,59 @@ public class Login extends AppCompatActivity {
         });
 
     }
+    private void handleFacebookAccessToken(AccessToken token) {
+        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+        firebaseAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            FirebaseUser user =firebaseAuth.getCurrentUser();
+                            updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(Login.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            updateUI(null);
+                        }
+                    }
+                });
+    }
 
+    private void updateUI(FirebaseUser user) {
+        if(user != null)
+        {
+            Intent intent = new Intent(Login.this,ScannerActivity.class);
+            startActivity(intent);
+        }else{
+            Toast.makeText(this,"Please login to continue",Toast.LENGTH_SHORT).show();
+        }
+    }
 
+    private  void facelogin(){
+        LoginManager.getInstance().logInWithReadPermissions(Login.this, Arrays.asList("email", "public_profile"));
+        LoginManager.getInstance().registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+
+                handleFacebookAccessToken(loginResult.getAccessToken());
+            }
+
+            @Override
+            public void onCancel() {
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+            }
+        });
+        SharedPreferences sharedPreferences1 = getSharedPreferences("facebookLogin", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences1.edit();
+        editor.putBoolean("facebookLogin", true);
+        editor.apply();
+
+    }
 
     public void CheckEditTextIsEmptyOrNot() {
 
@@ -253,6 +322,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        mCallbackManager.onActivityResult(requestCode,resultCode,data);
         super.onActivityResult(requestCode, resultCode, data);
 
 

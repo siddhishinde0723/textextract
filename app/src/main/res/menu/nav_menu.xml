@@ -24,6 +24,21 @@
         android:textColor="@color/yellow">
 
     </item>
+    <item android:id="@+id/translate"
+        android:title="Translate Text"
+        android:visible="true"
+        android:icon="@drawable/ic_changepassword"
+        android:textColor="@color/yellow">
+
+
+    </item>
+    <item android:id="@+id/logout"
+        android:title="Logout"
+        android:visible="true"
+        android:icon="@drawable/ic_logout"
+        android:textColor="@color/yellow">
+
+    </item>
 
 
 </menu>

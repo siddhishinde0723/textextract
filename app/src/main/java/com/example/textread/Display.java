@@ -60,12 +60,12 @@ public class Display extends AppCompatActivity implements NavigationView.OnNavig
     Spinner chlanguage;
     FirebaseTranslator translator;
    // Session session;
-    SharedPreferences sharedPreferences;
+    SharedPreferences sharedPreferences,sharedPreferences1;
     ActionBarDrawerToggle actionBarDrawerToggle;
     private ActionBarDrawerToggle t;
     private NavigationView nv;
     Login status;
-    boolean getLoginStatus;
+    boolean getLoginStatus,isGetLoginStatus;
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @SuppressLint("SetTextI18n")
     @Override
@@ -100,10 +100,16 @@ public class Display extends AppCompatActivity implements NavigationView.OnNavig
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         NavigationView navigationView = (NavigationView)findViewById(R.id.nav_menu);
         navigationView.setNavigationItemSelectedListener(this);
+
         sharedPreferences = getSharedPreferences("googleLogin", Context.MODE_PRIVATE);
         getLoginStatus = sharedPreferences.getBoolean("googleLogin", false);
         if(getLoginStatus){
             navigationView.getMenu().removeItem(R.id.changePass);
+        }
+        sharedPreferences1 = getSharedPreferences("facebookLogin", Context.MODE_PRIVATE);
+        getLoginStatus = sharedPreferences1.getBoolean("facebookLogin", false);
+        if(isGetLoginStatus){
+            navigationView.getMenu().removeItem(R.id.changepass);
         }
 
        /* session=new Session(this);
@@ -358,7 +364,7 @@ public class Display extends AppCompatActivity implements NavigationView.OnNavig
         redirectActivity(this, Profile.class);
     }
 
-*/
+
 
     public void ClickLogout(View view) {
         //recreate activity
@@ -377,7 +383,7 @@ public class Display extends AppCompatActivity implements NavigationView.OnNavig
         startActivity(intent);
 
     }
-
+*/
     @Override
     protected void onPause() {
         super.onPause();
@@ -433,6 +439,19 @@ public class Display extends AppCompatActivity implements NavigationView.OnNavig
                 Toast.makeText(this, "Change Password", Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             }
+
+        if (id == R.id.logout) {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.clear();
+            editor.apply();
+            //session.setLoggedin(true);
+
+            auth.signOut();
+            finish();
+            Intent intent = new Intent(Display.this, Login.class);
+            Toast.makeText(Display.this, "Logged Out Successfully.", Toast.LENGTH_LONG).show();
+            startActivity(intent);
+        }
 
 
         return false;

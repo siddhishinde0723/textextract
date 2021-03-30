@@ -54,6 +54,7 @@ import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
 */
 import java.io.IOException;
 import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class ScannerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -71,18 +72,15 @@ public class ScannerActivity extends AppCompatActivity implements NavigationView
     StorageReference storageReference;
     FirebaseFirestore fStore;
     FirebaseUser user;
-    //int currentTime = 0;
-    //final int SECONDS_BETWEEN_PHOTOS =900 ;
+
     Timer timer;
 
-    //Session sharedPref;
-    // sharedPref = SharedPrefApp.getInstance();
-    //private Session session;
+
     ActionBarDrawerToggle actionBarDrawerToggle;
     private ActionBarDrawerToggle t;
     private NavigationView nv;
-    boolean getLoginStatus;
-    SharedPreferences sharedPreferences;
+    boolean getLoginStatus,isGetLoginStatus;
+    SharedPreferences sharedPreferences,sharedPreferences1;
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -142,6 +140,11 @@ public class ScannerActivity extends AppCompatActivity implements NavigationView
         navigationView.getMenu().removeItem(R.id.changePass);
     }
 
+        sharedPreferences1 = getSharedPreferences("facebookLogin", Context.MODE_PRIVATE);
+        getLoginStatus = sharedPreferences1.getBoolean("facebookLogin", false);
+        if(isGetLoginStatus){
+            navigationView.getMenu().removeItem(R.id.changepass);
+        }
 
 
         /* StorageReference profileRef = storageReference.child("users/"+firebaseAuth.getCurrentUser().getUid()+"profile.jpg");
@@ -241,33 +244,32 @@ public class ScannerActivity extends AppCompatActivity implements NavigationView
 
                                 }
 
-                                //  cameraSource.stop();
-                                // Toast.makeText(getApplicationContext(),"Ok ready to capture 1...2...3...Click",Toast.LENGTH_SHORT).show();
-
-
-                               /* timer.schedule(new TimerTask() {
+                                timer.schedule(new TimerTask() {
                                         @Override
                                         public void run() {
-                                           //cameraSource.stop();
+                                           cameraSource.stop();
+
                                             String s = textView.getText().toString();
-                                          // cameraSource.stop();
+                                           //cameraSource.stop();
                                             Intent intent = new Intent(ScannerActivity.this, Display.class);
                                             intent.putExtra("", s);
                                             startActivity(intent);
                                             finish();
-                                           // cameraSource.stop();
+                                           //cameraSource.stop();
                                         }
-                                    },3000);*/
+                                    },3500);
 
-                                Toast.makeText(getApplicationContext(), "Ok ready to capture", Toast.LENGTH_SHORT).show();
-                                cameraSource.stop();
-                                String s = textView.getText().toString();
+
+                             //   Toast.makeText(getApplicationContext(), "Ok ready to capture", Toast.LENGTH_SHORT).show();
+                                //cameraSource.stop();
+                               // String s = textView.getText().toString();
                                 // cameraSource.stop();
-                                Intent intent = new Intent(ScannerActivity.this, Display.class);
-                                intent.putExtra("", s);
-                                startActivity(intent);
-                                finish();
+                               // Intent intent = new Intent(ScannerActivity.this, Display.class);
+                                //intent.putExtra("", s);
+                                //startActivity(intent);
+                                //finish();
                             }
+
                         });
                     }
 
@@ -291,11 +293,7 @@ public class ScannerActivity extends AppCompatActivity implements NavigationView
             });
 */
 
-   /*     //Checking whether the app has a permission to use camera
-        if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            //if not given permission than grant the permission
-            requestPermissions(new String[]{Manifest.permission.CAMERA}, 101);
-        }
+   /*
         ImageButton fab = findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -305,39 +303,8 @@ public class ScannerActivity extends AppCompatActivity implements NavigationView
                 textView.setText("");
             }
         });/*
-            Button logout = findViewById(R.id.logout);
-            logout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    firebaseAuth.signOut();
-                    finish();
-
-                    Intent intent = new Intent(ScannerActivity.this, Login.class);
-                    startActivity(intent);
-
-                    Toast.makeText(ScannerActivity.this, "Logged Out Successfully.", Toast.LENGTH_LONG).show();
-
-                }
-            });/*
-        Button copy=findViewById(R.id.copy) ;
-        copy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                String text =textView.getText().toString();
-                if(!text.equals("")){
-                    ClipData clipData=ClipData.newPlainText("text",text);
-                    clipboardManager.setPrimaryClip(clipData);
-                    Toast.makeText(ScannerActivity.this, "Copied.", Toast.LENGTH_LONG).show();
-                    paste.setEnabled(true);
-
-                }
 
 
-
-            }
-        });
         final Button paste=findViewById(R.id.paste);
         paste.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -466,86 +433,7 @@ public class ScannerActivity extends AppCompatActivity implements NavigationView
             drawerLayout.closeDrawer(GravityCompat.START);
 
         }
-    }/*
-    public static void redirectActivity(Activity activity, Class aClass) {
-        //initialized intent
-        Intent intent = new Intent(activity,aClass);
-        //set flag
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        //start activity
-        activity.startActivity(intent);
-
     }
-    public void ClickHome(View view){
-        //recreate activity
-      recreate();
-
-    }
-    public void ClickDisplay(View view){
-        //recreate activity
-        redirectActivity(this,Display.class);
-
-    }
-    public void ClickProfile(View view){
-        //recreate activity
-        redirectActivity(this,Profile.class);
-    }
-    public void ClickChangePass(View view) {
-        //recreate activity
-        redirectActivity(this, Change_Password.class);
-    }
-     /*   AlertDialog.Builder builder = new AlertDialog.Builder(
-                ScannerActivity.this);
-        builder.setTitle("Chnage Password");
-        builder.setMessage("Google Logged in");
-
-
-        builder.setNegativeButton("Yes",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,
-                                        int which) {
-                        Toast.makeText(ScannerActivity.this, "Cannot change password if login is done using Google ID", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(ScannerActivity.this, Profile.class);
-                        startActivity(intent);
-                    }
-                });
-        builder.setPositiveButton("No",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,
-                                        int which) {
-                        Intent intent = new Intent(ScannerActivity.this, Change_Password.class);
-                        startActivity(intent);
-
-                    }
-                });
-
-
-        builder.show();
-    }
-*/
-
-
-    public void ClickLogout(View view) {
-        //recreate activity
-       // session.setLoggedIn(getApplicationContext(), false);
-
-        logout();
-    }
-
-    public void logout() {
-      //session.setLoggedin(true);
-        SharedPreferences.Editor editor=sharedPreferences.edit();
-        editor.clear();
-        editor.apply();
-        firebaseAuth.signOut();
-        finish();
-
-        Intent intent = new Intent(ScannerActivity.this, Login.class);
-        Toast.makeText(ScannerActivity.this, "Logged Out Successfully.", Toast.LENGTH_LONG).show();
-        startActivity(intent);
-
-    }
-
     @Override
     protected void onPause() {
         super.onPause();
@@ -567,25 +455,29 @@ public class ScannerActivity extends AppCompatActivity implements NavigationView
             Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show();
             startActivity(intent);
         }
-        if(!getLoginStatus) {
+        if(!getLoginStatus || !isGetLoginStatus) {
             if (id == R.id.changePass) {
                 Intent intent = new Intent(ScannerActivity.this, Change_Password.class);
                 Toast.makeText(this, "Change Password", Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             }
         }
+
+        if (id == R.id.logout) {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.clear();
+            editor.apply();
+            //session.setLoggedin(true);
+
+            firebaseAuth.signOut();
+            finish();
+            Intent intent = new Intent(ScannerActivity.this, Login.class);
+            Toast.makeText(ScannerActivity.this, "Logged Out Successfully.", Toast.LENGTH_LONG).show();
+            startActivity(intent);
+        }
+
         return false;
     }
-/*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.nav_menu, menu);
-        session = new Session(this);
-        if (session.loggedin(getApplicationContext())) {
-            MenuItem items = menu.findItem(R.id.changePass);
-            items.setVisible(false);
-        }
-        return false;
-    }*/
+
 }
 

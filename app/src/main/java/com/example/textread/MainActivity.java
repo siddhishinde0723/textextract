@@ -88,19 +88,8 @@ public class      MainActivity extends AppCompatActivity {
 
                                     Toast.makeText(MainActivity.this, "Register Successfully", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(getApplicationContext(), Login.class));
-                                    userID = firebaseAuth.getCurrentUser().getUid();
-                                    DocumentReference documentReference = firestore.collection("users").document(userID);
-                                    Map<String,Object> user = new HashMap<>();
-                                    user.put("Name",NameHolder);
-                                    user.put("Email",EmailHolder);
-                                    documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-                                            Log.d(TAG,"Data is added"+userID);
 
-                                        }
-                                    });
-                                    startActivity(new Intent(getApplicationContext(), Login.class));
+
                                 }
 
                                 else {
