@@ -61,8 +61,8 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     private ActionBarDrawerToggle t;
     private NavigationView nv;
    // Session session;
-    SharedPreferences sharedPreferences;
-    boolean getLoginStatus;
+    SharedPreferences sharedPreferences,sharedPreferences1;
+    boolean getLoginStatus,isGetLoginStatus;
 
     @SuppressLint({"SetTextI18n", "CheckResult", "CutPasteId"})
     @Override
@@ -110,6 +110,12 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             navigationView.getMenu().removeItem(R.id.changePass);
             profile1.setVisibility(View.INVISIBLE);
         }
+        sharedPreferences1 = getSharedPreferences("facebookLogin", Context.MODE_PRIVATE);
+        getLoginStatus = sharedPreferences1.getBoolean("facebookLogin", false);
+        if(isGetLoginStatus){
+            navigationView.getMenu().removeItem(R.id.changepass);
+            profile1.setVisibility(View.INVISIBLE);
+        }
 
 
 
@@ -122,26 +128,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             }
         });
 
-        DocumentReference documentReference1 = fStore.collection("users").document(userID);
-        documentReference1.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
 
-                name.setText(documentSnapshot.getString("Name"));
-                email.setText(documentSnapshot.getString("Email"));
-
-            }
-        });/*
-        DocumentReference documentReference = fStore.collection("users").document(userID);
-        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-
-                name1.setText(user.getDisplayName());
-                email1.setText(user.getEmail());
-            }
-        });
-*/
     }
 
     protected void onActivityResult(int requestCode,int resultCode, @androidx.annotation.Nullable Intent data) {
@@ -260,7 +247,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         //start activity
         activity.startActivity(intent);
 
-    }*/
+    }
     public void ClickLogout(View view) {
         //recreate activity
         logout();
@@ -278,7 +265,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         startActivity(intent);
 
     }
-
+*/
     @Override
     protected void onPause() {
         super.onPause();
@@ -305,6 +292,20 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             Toast.makeText(this, "Change Password", Toast.LENGTH_SHORT).show();
             startActivity(intent);
         }
+
+        if (id == R.id.logout) {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.clear();
+            editor.apply();
+            //session.setLoggedin(true);
+
+            auth.signOut();
+            finish();
+            Intent intent = new Intent(Profile.this, Login.class);
+            Toast.makeText(Profile.this, "Logged Out Successfully.", Toast.LENGTH_LONG).show();
+            startActivity(intent);
+        }
+
 
 
         return false;
