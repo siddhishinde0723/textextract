@@ -1,7 +1,6 @@
 package com.example.textread;
 
 
-
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.ComponentName;
@@ -63,9 +62,9 @@ public class Login extends AppCompatActivity {
     // Creating string to hold values.
     String EmailHolder, PasswordHolder;
 
-    Button Login, SignUP, ButtonGoToLoginActivity,sign_facebook;
+    Button Login, SignUP, ButtonGoToLoginActivity, sign_facebook;
     // Creating Boolean to hold EditText empty true false value
-    Boolean EditTextEmptyCheck,IsLoggedIn=false;
+    Boolean EditTextEmptyCheck, IsLoggedIn = false;
 
     // Creating progress dialog
     ProgressDialog progressDialog;
@@ -102,7 +101,7 @@ public class Login extends AppCompatActivity {
 
         // Initialize Facebook Login button
         mCallbackManager = CallbackManager.Factory.create();
-        sign_facebook= findViewById(R.id.login_facbook);
+        sign_facebook = findViewById(R.id.login_facbook);
         sign_facebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,7 +124,6 @@ public class Login extends AppCompatActivity {
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
 
 
                 CheckEditTextIsEmptyOrNot();
@@ -202,6 +200,7 @@ public class Login extends AppCompatActivity {
         });
 
     }
+
     private void handleFacebookAccessToken(AccessToken token) {
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
         firebaseAuth.signInWithCredential(credential)
@@ -210,7 +209,7 @@ public class Login extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            FirebaseUser user =firebaseAuth.getCurrentUser();
+                            FirebaseUser user = firebaseAuth.getCurrentUser();
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
@@ -223,16 +222,22 @@ public class Login extends AppCompatActivity {
     }
 
     private void updateUI(FirebaseUser user) {
-        if(user != null)
-        {
-            Intent intent = new Intent(Login.this,ScannerActivity.class);
+        if (user != null) {
+
+            SharedPreferences sharedPreferences1 = getSharedPreferences("facebookLogin", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences1.edit();
+            editor.putBoolean("facebookLogin", true);
+            editor.apply();
+
+            Intent intent = new Intent(Login.this, ScannerActivity.class);
             startActivity(intent);
-        }else{
-            Toast.makeText(this,"Please login to continue",Toast.LENGTH_SHORT).show();
+            finish();
+        } else {
+            Toast.makeText(this, "Please login to continue", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private  void facelogin(){
+    private void facelogin() {
         LoginManager.getInstance().logInWithReadPermissions(Login.this, Arrays.asList("email", "public_profile"));
         LoginManager.getInstance().registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -249,10 +254,7 @@ public class Login extends AppCompatActivity {
             public void onError(FacebookException error) {
             }
         });
-        SharedPreferences sharedPreferences1 = getSharedPreferences("facebookLogin", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences1.edit();
-        editor.putBoolean("facebookLogin", true);
-        editor.apply();
+
 
     }
 
@@ -318,11 +320,10 @@ public class Login extends AppCompatActivity {
         startActivityForResult(signInIntent, RC_SIGN_IN);
 
 
-
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        mCallbackManager.onActivityResult(requestCode,resultCode,data);
+        mCallbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
 
 
