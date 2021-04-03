@@ -238,6 +238,7 @@ public class ScannerActivity extends AppCompatActivity implements NavigationView
                                     stringBuilder.append(item.getValue());
                                     stringBuilder.append("\n");
                                     textView.setText(stringBuilder.toString());
+                                   // cameraSource.stop();
                                     //Toast.makeText(getApplicationContext(),"Ok ready to capture 1...2...3...Click",Toast.LENGTH_LONG).show();
 
                                 }
@@ -245,21 +246,23 @@ public class ScannerActivity extends AppCompatActivity implements NavigationView
                                 timer.schedule(new TimerTask() {
                                     @Override
                                     public void run() {
-                                        cameraSource.stop();
+                                      //  cameraSource.stop();
 
                                         String s = textView.getText().toString();
                                         //cameraSource.stop();
                                         Intent intent = new Intent(ScannerActivity.this, Display.class);
+
                                         intent.putExtra("", s);
+
                                         startActivity(intent);
                                         finish();
-                                        //cameraSource.stop();
+                                      //  cameraSource.stop();
                                     }
                                 }, 3500);
 
-
+                                cameraSource.stop();
                                 //   Toast.makeText(getApplicationContext(), "Ok ready to capture", Toast.LENGTH_SHORT).show();
-                                //cameraSource.stop();
+
                                 // String s = textView.getText().toString();
                                 // cameraSource.stop();
                                 // Intent intent = new Intent(ScannerActivity.this, Display.class);
@@ -441,12 +444,17 @@ public class ScannerActivity extends AppCompatActivity implements NavigationView
             Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show();
             startActivity(intent);
         }
-        if (!getLoginStatus || !isGetLoginStatus) {
+        //if (!getLoginStatus || !isGetLoginStatus) {
             if (id == R.id.changePass) {
                 Intent intent = new Intent(ScannerActivity.this, Change_Password.class);
                 Toast.makeText(this, "Change Password", Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             }
+
+        if (id == R.id.translate) {
+            Intent intent = new Intent(ScannerActivity.this, Translate.class);
+            Toast.makeText(this, "Translate Text", Toast.LENGTH_SHORT).show();
+            startActivity(intent);
         }
 
         if (id == R.id.logout) {

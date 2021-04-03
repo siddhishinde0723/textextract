@@ -115,7 +115,7 @@ public class Login extends AppCompatActivity {
             // Finishing current Login Activity
             finish();
 
-            Intent intent = new Intent(Login.this, ScannerActivity.class);
+            Intent intent = new Intent(Login.this,  Extraction.class);
             startActivity(intent);
 
         }
@@ -229,7 +229,7 @@ public class Login extends AppCompatActivity {
             editor.putBoolean("facebookLogin", true);
             editor.apply();
 
-            Intent intent = new Intent(Login.this, ScannerActivity.class);
+            Intent intent = new Intent(Login.this,  Extraction.class);
             startActivity(intent);
             finish();
         } else {
@@ -293,7 +293,7 @@ public class Login extends AppCompatActivity {
                             //session.setLoggedIn(getApplicationContext(), true);
 
                             progressDialog.dismiss();
-                            Intent intent = new Intent(Login.this, ScannerActivity.class);
+                            Intent intent = new Intent(Login.this,  Extraction.class);
                             startActivity(intent);
                             finish();
 
@@ -338,7 +338,7 @@ public class Login extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Toast.makeText(getApplicationContext(), "Logged in Successfully", Toast.LENGTH_SHORT).show();
 
-                        startActivity(new Intent(getApplicationContext(), ScannerActivity.class));
+                        startActivity(new Intent(getApplicationContext(), Extraction.class));
 
 
                     }
