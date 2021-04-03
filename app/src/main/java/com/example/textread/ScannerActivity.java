@@ -435,7 +435,7 @@ public class ScannerActivity extends AppCompatActivity implements NavigationView
 
         int id = item.getItemId();
         if (id == R.id.camera) {
-            Intent intent = new Intent(ScannerActivity.this, ScannerActivity.class);
+            Intent intent = new Intent(ScannerActivity.this, Extraction.class);
             Toast.makeText(this, "Scan Image", Toast.LENGTH_SHORT).show();
             startActivity(intent);
         }

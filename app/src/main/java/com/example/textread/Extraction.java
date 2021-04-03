@@ -21,6 +21,7 @@ import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -28,6 +29,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.ml.vision.FirebaseVision;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.text.FirebaseVisionText;
@@ -42,7 +44,7 @@ import javax.annotation.Nullable;
 public class Extraction extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
 
-
+    TextView textView;
     ImageView add,gallery;
     boolean getLoginStatus, isGetLoginStatus;
     SharedPreferences sharedPreferences, sharedPreferences1;
@@ -53,14 +55,18 @@ public class Extraction extends AppCompatActivity implements NavigationView.OnNa
     FirebaseAuth firebaseAuth;
     static final int CAPTURE_IMAGE_REQUEST = 1,SELECT_FILE=0;
     private Uri picUri;
+    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_extraction);
-
+        firebaseAuth = FirebaseAuth.getInstance();
+        //paste=findViewById(R.id.paste);
+        user = firebaseAuth.getCurrentUser();
         gallery=findViewById(R.id.gallery_display);
-
+        drawerLayout = findViewById(R.id.drawer_layout);
+        textView=findViewById(R.id.textView);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.Open, R.string.Close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
@@ -216,7 +222,7 @@ public class Extraction extends AppCompatActivity implements NavigationView.OnNa
 
         FileOutputStream outputStream = null;
         File file = Environment.getExternalStorageDirectory();
-        File dir = new File(file.getAbsolutePath() + "/MyPics");
+        File dir = new File(file.getAbsolutePath() + "/Data");
         dir.mkdirs();
 
         String filename = String.format("%d.jpg",System.currentTimeMillis());
@@ -278,7 +284,7 @@ public class Extraction extends AppCompatActivity implements NavigationView.OnNa
 
         int id = item.getItemId();
         if (id == R.id.camera) {
-            Intent intent = new Intent(Extraction.this, ScannerActivity.class);
+            Intent intent = new Intent(Extraction.this, Extraction.class);
             Toast.makeText(this, "Scan Image", Toast.LENGTH_SHORT).show();
             startActivity(intent);
         }

@@ -103,14 +103,18 @@ public class Display extends AppCompatActivity implements NavigationView.OnNavig
 
         sharedPreferences = getSharedPreferences("googleLogin", Context.MODE_PRIVATE);
         getLoginStatus = sharedPreferences.getBoolean("googleLogin", false);
-        if(getLoginStatus){
+//        if (getLoginStatus) {
+//            navigationView.getMenu().removeItem(R.id.changePass);
+//        }
+
+        sharedPreferences1 = getSharedPreferences("facebookLogin", Context.MODE_PRIVATE);
+        isGetLoginStatus = sharedPreferences1.getBoolean("facebookLogin", false);
+
+        if (getLoginStatus || isGetLoginStatus) {
             navigationView.getMenu().removeItem(R.id.changePass);
         }
-        sharedPreferences1 = getSharedPreferences("facebookLogin", Context.MODE_PRIVATE);
-        getLoginStatus = sharedPreferences1.getBoolean("facebookLogin", false);
-        if(isGetLoginStatus){
-            navigationView.getMenu().removeItem(R.id.changepass);
-        }
+
+
 
        /* session=new Session(this);
         if(!session.loggedin()){
@@ -423,7 +427,7 @@ public class Display extends AppCompatActivity implements NavigationView.OnNavig
 
         int id = item.getItemId();
         if (id == R.id.camera) {
-            Intent intent = new Intent(Display.this, ScannerActivity.class);
+            Intent intent = new Intent(Display.this, Extraction.class);
             Toast.makeText(this, "Scan Image", Toast.LENGTH_SHORT).show();
             startActivity(intent);
         }
@@ -439,12 +443,20 @@ public class Display extends AppCompatActivity implements NavigationView.OnNavig
                 Toast.makeText(this, "Change Password", Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             }
+        if (id == R.id.translate) {
+            Intent intent = new Intent(Display.this, Translate.class);
+            Toast.makeText(this, "Translate Text", Toast.LENGTH_SHORT).show();
+            startActivity(intent);
+        }
 
         if (id == R.id.logout) {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.clear();
             editor.apply();
             //session.setLoggedin(true);
+            SharedPreferences.Editor editor2 = sharedPreferences1.edit();
+            editor2.clear();
+            editor2.apply();
 
             auth.signOut();
             finish();

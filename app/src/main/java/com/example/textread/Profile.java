@@ -81,7 +81,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         fStore = FirebaseFirestore.getInstance();
         profile = findViewById(R.id.profile);
         linearLayout = findViewById(R.id.click);
-        userID = auth.getCurrentUser().getUid();
+     //   userID = auth.getCurrentUser().getUid();
         user = auth.getCurrentUser();
 
         storageReference = FirebaseStorage.getInstance().getReference();
@@ -106,16 +106,29 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
         sharedPreferences = getSharedPreferences("googleLogin", Context.MODE_PRIVATE);
         getLoginStatus = sharedPreferences.getBoolean("googleLogin", false);
-        if(getLoginStatus){
+//        if (getLoginStatus) {
+//            navigationView.getMenu().removeItem(R.id.changePass);
+//        }
+
+        sharedPreferences1 = getSharedPreferences("facebookLogin", Context.MODE_PRIVATE);
+        isGetLoginStatus = sharedPreferences1.getBoolean("facebookLogin", false);
+
+        if (getLoginStatus || isGetLoginStatus) {
             navigationView.getMenu().removeItem(R.id.changePass);
             profile1.setVisibility(View.INVISIBLE);
         }
-        sharedPreferences1 = getSharedPreferences("facebookLogin", Context.MODE_PRIVATE);
-        getLoginStatus = sharedPreferences1.getBoolean("facebookLogin", false);
-        if(isGetLoginStatus){
-            navigationView.getMenu().removeItem(R.id.changepass);
-            profile1.setVisibility(View.INVISIBLE);
-        }
+
+        storageReference = FirebaseStorage.getInstance().getReference();
+
+
+        auth = FirebaseAuth.getInstance();
+        StorageReference profileRef = storageReference.child("users/" + auth.getCurrentUser().getUid() + "profile.jpg");
+        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).into(profile1);
+            }
+        });
 
 
 
@@ -276,7 +289,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
         int id = item.getItemId();
         if (id == R.id.camera) {
-            Intent intent = new Intent(Profile.this, ScannerActivity.class);
+            Intent intent = new Intent(Profile.this, Extraction.class);
             Toast.makeText(this, "Scan Image", Toast.LENGTH_SHORT).show();
             startActivity(intent);
         }
@@ -292,13 +305,20 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             Toast.makeText(this, "Change Password", Toast.LENGTH_SHORT).show();
             startActivity(intent);
         }
+        if (id == R.id.translate) {
+            Intent intent = new Intent(Profile.this, Translate.class);
+            Toast.makeText(this, "Translate Text", Toast.LENGTH_SHORT).show();
+            startActivity(intent);
+        }
 
         if (id == R.id.logout) {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.clear();
             editor.apply();
             //session.setLoggedin(true);
-
+            SharedPreferences.Editor editor2 = sharedPreferences1.edit();
+            editor2.clear();
+            editor2.apply();
             auth.signOut();
             finish();
             Intent intent = new Intent(Profile.this, Login.class);
