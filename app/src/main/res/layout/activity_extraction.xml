@@ -25,10 +25,10 @@
 
         <ImageView
             android:id="@+id/gallery_display"
-            android:layout_width="400dp"
-            android:layout_height="345dp"
+            android:layout_width="match_parent"
+            android:layout_height="468dp"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="323dp" />
+            android:layout_marginBottom="200dp" />
 
         <ImageView
             android:id="@+id/add"
@@ -54,9 +54,9 @@
             android:layout_height="61dp"
             android:layout_alignParentBottom="true"
 
-            android:layout_marginBottom="228dp"
+            android:layout_marginBottom="119dp"
             android:text="no text"
-            android:textColor="#040303" />
+            android:textColor="@color/black" />
     </RelativeLayout>
     </LinearLayout>
 
