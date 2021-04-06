@@ -28,6 +28,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.SparseArray;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -375,6 +376,5 @@ public class Extraction extends AppCompatActivity implements NavigationView.OnNa
 
         return false;
     }
-
 
 }

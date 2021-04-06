@@ -21,49 +21,10 @@
         <TextView
             android:id="@+id/display"
             android:layout_width="352dp"
-            android:layout_height="285dp"
+            android:layout_height="464dp"
             android:layout_gravity="center"
             android:textColor="@color/yellow"
             android:textSize="24sp" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.4"
-
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/dpart"
-                android:layout_width="335dp"
-                android:layout_height="165dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginTop="3dp"
-                android:layout_marginEnd="54dp"
-                android:layout_marginRight="54dp"
-                android:layout_marginBottom="49dp"
-                android:hint="Please paste the copied text here for translation/to send"
-                android:textColor="@color/yellow"
-                android:textColorHint="@color/yellow" />
-
-            <Spinner
-                android:id="@+id/language"
-                android:layout_width="wrap_content"
-                android:layout_height="28dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginEnd="221dp"
-                android:layout_marginRight="221dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/ic_rect"
-                android:entries="@array/language"
-                android:prompt="@string/select"
-                android:textColor="#E9EDEF" />
-        </RelativeLayout>
 
 
         <RelativeLayout

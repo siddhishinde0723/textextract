@@ -76,16 +76,16 @@ public class Display extends AppCompatActivity implements NavigationView.OnNavig
         text = findViewById(R.id.text);
         drawerLayout = findViewById(R.id.drawer_layout);
         profileimg = findViewById(R.id.profileimg);
-        TextView display1 = findViewById(R.id.display);
+        final TextView display1 = findViewById(R.id.display);
         display1.setTextIsSelectable(true);
         storageReference = FirebaseStorage.getInstance().getReference();
         auth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
         //userID = Objects.requireNonNull(auth.getCurrentUser()).getUid();
         user = auth.getCurrentUser();
-        dpart = findViewById(R.id.dpart);
+       // dpart = findViewById(R.id.dpart);
         number = findViewById(R.id.number);
-        chlanguage=findViewById(R.id.language);
+       // chlanguage=findViewById(R.id.language);
         ActivityCompat.requestPermissions(Display.this, new String[]{Manifest.permission.SEND_SMS, Manifest.permission.READ_SMS}, PackageManager.PERMISSION_GRANTED);
 
 
@@ -169,7 +169,7 @@ public class Display extends AppCompatActivity implements NavigationView.OnNavig
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,
                                                 int which) {
-                                String text = dpart.getText().toString();
+                                String text = display1.getText().toString();
                                 String toNumber = number.getText().toString();
 
 
@@ -183,7 +183,7 @@ public class Display extends AppCompatActivity implements NavigationView.OnNavig
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,
                                                 int which) {
-                                String text1 = dpart.getText().toString();
+                                String text1 = display1.getText().toString();
                                 String phone_Num = number.getText().toString();
 
                                 try {
