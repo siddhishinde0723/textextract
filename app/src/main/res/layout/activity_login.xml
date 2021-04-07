@@ -99,9 +99,9 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="206dp"
-            android:layout_marginRight="206dp"
-            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="212dp"
+            android:layout_marginRight="212dp"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/googleg_standard_color_18"
             android:textAllCaps="false"
             android:textSize="16sp" />
