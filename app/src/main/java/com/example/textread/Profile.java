@@ -46,7 +46,7 @@ import com.squareup.picasso.Picasso;
 
 public class Profile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     TextView name,name1,email1,email,text,change;
-    FirebaseAuth auth;
+    FirebaseAuth firebaseAuth;
     FirebaseFirestore fStore;
     FirebaseUser user;
     String userID;
@@ -69,7 +69,8 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
+        firebaseAuth = FirebaseAuth.getInstance();
+        user = firebaseAuth.getCurrentUser();
         name = findViewById(R.id.name);
         text = findViewById(R.id.text);
         // change=findViewById(R.id.change);
@@ -77,12 +78,12 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         email = findViewById(R.id.email);
         name1 = findViewById(R.id.name1);
         email1 = findViewById(R.id.email1);
-        auth = FirebaseAuth.getInstance();
+        //auth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
         profile = findViewById(R.id.profile);
         linearLayout = findViewById(R.id.click);
      //   userID = auth.getCurrentUser().getUid();
-        user = auth.getCurrentUser();
+       // user = auth.getCurrentUser();
 
         storageReference = FirebaseStorage.getInstance().getReference();
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -121,8 +122,8 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         storageReference = FirebaseStorage.getInstance().getReference();
 
 
-        auth = FirebaseAuth.getInstance();
-        StorageReference profileRef = storageReference.child("users/" + auth.getCurrentUser().getUid() + "profile.jpg");
+        firebaseAuth = FirebaseAuth.getInstance();
+        StorageReference profileRef = storageReference.child("users/" + firebaseAuth.getCurrentUser().getUid() + "profile.jpg");
         profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
@@ -161,7 +162,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
     private void uploadImage(Uri imageUri) {
         //upload image to firebase
-        final StorageReference fileRef = storageReference.child("users/"+auth.getCurrentUser().getUid()+"profile.jpg");
+        final StorageReference fileRef = storageReference.child("users/"+firebaseAuth.getCurrentUser().getUid()+"profile.jpg");
         fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -319,11 +320,14 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             SharedPreferences.Editor editor2 = sharedPreferences1.edit();
             editor2.clear();
             editor2.apply();
-            auth.signOut();
-            finish();
+
+           // auth.signOut();
             Intent intent = new Intent(Profile.this, Login.class);
             Toast.makeText(Profile.this, "Logged Out Successfully.", Toast.LENGTH_LONG).show();
             startActivity(intent);
+
+            firebaseAuth.signOut();
+            finish();
         }
 
 

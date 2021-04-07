@@ -51,7 +51,7 @@ public class Display extends AppCompatActivity implements NavigationView.OnNavig
     DrawerLayout drawerLayout;
     TextView text;
     EditText dpart,number;
-    FirebaseAuth auth;
+    FirebaseAuth firebaseAuth;
     FirebaseFirestore fStore;
     String userID;
     StorageReference storageReference;
@@ -72,6 +72,9 @@ public class Display extends AppCompatActivity implements NavigationView.OnNavig
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display);
+        firebaseAuth = FirebaseAuth.getInstance();
+        user = firebaseAuth.getCurrentUser();
+
         status=new Login();
         text = findViewById(R.id.text);
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -79,10 +82,10 @@ public class Display extends AppCompatActivity implements NavigationView.OnNavig
         final TextView display1 = findViewById(R.id.display);
         display1.setTextIsSelectable(true);
         storageReference = FirebaseStorage.getInstance().getReference();
-        auth = FirebaseAuth.getInstance();
+      //  auth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
         //userID = Objects.requireNonNull(auth.getCurrentUser()).getUid();
-        user = auth.getCurrentUser();
+        //user = auth.getCurrentUser();
        // dpart = findViewById(R.id.dpart);
         number = findViewById(R.id.number);
        // chlanguage=findViewById(R.id.language);
@@ -458,11 +461,12 @@ public class Display extends AppCompatActivity implements NavigationView.OnNavig
             editor2.clear();
             editor2.apply();
 
-            auth.signOut();
-            finish();
+            //auth.signOut();
             Intent intent = new Intent(Display.this, Login.class);
             Toast.makeText(Display.this, "Logged Out Successfully.", Toast.LENGTH_LONG).show();
             startActivity(intent);
+            firebaseAuth.signOut();
+            finish();
         }
 
 

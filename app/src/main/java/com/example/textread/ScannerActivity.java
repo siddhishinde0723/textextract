@@ -105,13 +105,13 @@ public class ScannerActivity extends AppCompatActivity implements NavigationView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scanner);
+        firebaseAuth = FirebaseAuth.getInstance();
+        user = firebaseAuth.getCurrentUser();
         //  session=new Session(this);
         //Assign Id
         camareview = (SurfaceView) findViewById(R.id.surface_view);
         textView = findViewById(R.id.textdata);
-        firebaseAuth = FirebaseAuth.getInstance();
-        //paste=findViewById(R.id.paste);
-        user = firebaseAuth.getCurrentUser();
+
         text = findViewById(R.id.text);
         profileimg = findViewById(R.id.profileimg);
         fStore = FirebaseFirestore.getInstance();
@@ -467,11 +467,13 @@ public class ScannerActivity extends AppCompatActivity implements NavigationView
             editor2.apply();
 
             //session.setLoggedin(true);
-            finish();
-            firebaseAuth.signOut();
+
             Intent intent = new Intent(ScannerActivity.this, Login.class);
             Toast.makeText(ScannerActivity.this, "Logged Out Successfully.", Toast.LENGTH_LONG).show();
             startActivity(intent);
+
+            firebaseAuth.signOut();
+            finish();
 
         }
 

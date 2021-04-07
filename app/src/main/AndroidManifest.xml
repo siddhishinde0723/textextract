@@ -17,15 +17,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Extraction" android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Translate" android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Change_Password" android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Profile" android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ResetPass" android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".MainActivity"  android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".Display" android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ScannerActivity" android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Login" android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".Extraction" android:theme="@style/AppTheme.NoActionBar" android:noHistory="true"/>
+        <activity android:name=".Translate" android:theme="@style/AppTheme.NoActionBar" android:noHistory="true"/>
+        <activity android:name=".Change_Password" android:theme="@style/AppTheme.NoActionBar" android:noHistory="true"/>
+        <activity android:name=".Profile" android:theme="@style/AppTheme.NoActionBar" android:noHistory="true" />
+        <activity android:name=".ResetPass" android:theme="@style/AppTheme.NoActionBar" android:noHistory="true"/>
+        <activity android:name=".MainActivity"  android:theme="@style/AppTheme.NoActionBar"  android:noHistory="true"/>
+        <activity android:name=".Display" android:theme="@style/AppTheme.NoActionBar"  android:noHistory="true" />
+        <activity android:name=".ScannerActivity" android:theme="@style/AppTheme.NoActionBar"  android:noHistory="true" />
+        <activity android:name=".Login" android:theme="@style/AppTheme.NoActionBar"  android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

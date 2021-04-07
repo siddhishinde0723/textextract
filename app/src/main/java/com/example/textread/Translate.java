@@ -31,6 +31,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.ml.common.modeldownload.FirebaseModelDownloadConditions;
 import com.google.firebase.ml.naturallanguage.FirebaseNaturalLanguage;
@@ -44,7 +45,8 @@ public class Translate extends AppCompatActivity implements NavigationView.OnNav
 
     SharedPreferences sharedPreferences,sharedPreferences1;
     EditText data,number;
-    FirebaseAuth auth;
+    FirebaseAuth firebaseAuth;
+    FirebaseUser user;
     FirebaseFirestore fStore;
     Spinner chlanguage;
     FirebaseTranslator translator;
@@ -60,13 +62,15 @@ public class Translate extends AppCompatActivity implements NavigationView.OnNav
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_translate);
+        firebaseAuth = FirebaseAuth.getInstance();
+        user = firebaseAuth.getCurrentUser();
 
         drawerLayout = findViewById(R.id.drawer_layout);
 
         data = findViewById(R.id.data);
         data.setTextIsSelectable(true);
         storageReference = FirebaseStorage.getInstance().getReference();
-        auth = FirebaseAuth.getInstance();
+
         fStore = FirebaseFirestore.getInstance();
         //userID = Objects.requireNonNull(auth.getCurrentUser()).getUid();
 
@@ -404,11 +408,13 @@ public class Translate extends AppCompatActivity implements NavigationView.OnNav
             editor2.clear();
             editor2.apply();
 
-            auth.signOut();
-            finish();
+         //   auth.signOut();
+
             Intent intent = new Intent(Translate.this, Login.class);
             Toast.makeText(Translate.this, "Logged Out Successfully.", Toast.LENGTH_LONG).show();
             startActivity(intent);
+            firebaseAuth.signOut();
+            finish();
         }
 
 

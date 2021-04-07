@@ -71,8 +71,6 @@ public class Extraction extends AppCompatActivity implements NavigationView.OnNa
     private ActionBarDrawerToggle t;
     private NavigationView nv;
     FirebaseAuth firebaseAuth;
-    static final int CAPTURE_IMAGE_REQUEST = 1,SELECT_FILE=0;
-    private Uri picUri;
     FirebaseUser user;
     private static final int CAMERA_REQUEST_CODE=200,STORAGE_REQUEST_CODE=400,IMAGE_PICK_GALLERY_CODE=1000,IMAGE_PICK_CAMERA_CODE=1001;
     String cameraPermission[],storagePermission[];
@@ -366,11 +364,13 @@ public class Extraction extends AppCompatActivity implements NavigationView.OnNa
             editor2.apply();
 
             //session.setLoggedin(true);
-            finish();
-            firebaseAuth.signOut();
+           //
+            // firebaseAuth.signOut();
             Intent intent = new Intent(Extraction.this, Login.class);
             Toast.makeText(Extraction.this, "Logged Out Successfully.", Toast.LENGTH_LONG).show();
             startActivity(intent);
+            firebaseAuth.signOut();
+            finish();
 
         }
 

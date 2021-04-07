@@ -38,7 +38,7 @@ public class Change_Password extends AppCompatActivity {
     TextView text,show1,show2,show3,show4;
     EditText newpass,oldpass,confirm;
     Button changepass;
-    FirebaseAuth auth;
+    FirebaseAuth firebaseAuth;
     FirebaseFirestore fStore;
     String userID;
     StorageReference storageReference;
@@ -48,6 +48,8 @@ public class Change_Password extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_changepassword);
+        firebaseAuth = FirebaseAuth.getInstance();
+        user = firebaseAuth.getCurrentUser();
         text = findViewById(R.id.text);
         show1 = findViewById(R.id.show1);
         show2 = findViewById(R.id.show2);
@@ -59,10 +61,10 @@ public class Change_Password extends AppCompatActivity {
         confirm = findViewById(R.id.confirm);
         changepass = findViewById(R.id.changepass);
         storageReference = FirebaseStorage.getInstance().getReference();
-        auth = FirebaseAuth.getInstance();
+      //  auth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
         //userID = Objects.requireNonNull(auth.getCurrentUser()).getUid();
-        user = auth.getCurrentUser();
+      //  user = auth.getCurrentUser();
         dialog = new ProgressDialog(this);
 
         newpass.addTextChangedListener(new TextWatcher() {
@@ -111,7 +113,7 @@ public class Change_Password extends AppCompatActivity {
         //pd.show();
 
         //get current user
-        final FirebaseUser user = auth.getCurrentUser();
+        final FirebaseUser user = firebaseAuth.getCurrentUser();
 
         //before changing password re-authenticate the user
         AuthCredential authCredential = EmailAuthProvider.getCredential(user.getEmail(), oldPassword);
@@ -128,7 +130,7 @@ public class Change_Password extends AppCompatActivity {
                                         //password updated
                                         //pd.dismiss();
                                         Toast.makeText(getApplicationContext(), "Password Updated...", Toast.LENGTH_SHORT).show();
-                                        auth.signOut();
+                                        firebaseAuth.signOut();
                                         finish();
                                         Intent intent = new Intent(Change_Password.this,Login.class);
                                         startActivity(intent);
@@ -276,12 +278,14 @@ public class Change_Password extends AppCompatActivity {
 
 
     public void logout() {
-        auth.signOut();
-        finish();
+       // auth.signOut();
+
 
         Intent intent = new Intent(Change_Password.this, Login.class);
         Toast.makeText(Change_Password.this, "Logged Out Successfully.", Toast.LENGTH_LONG).show();
         startActivity(intent);
+        firebaseAuth.signOut();
+        finish();
 
     }
 
