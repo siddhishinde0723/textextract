@@ -64,6 +64,8 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     SharedPreferences sharedPreferences,sharedPreferences1;
     boolean getLoginStatus,isGetLoginStatus;
 
+
+
     @SuppressLint({"SetTextI18n", "CheckResult", "CutPasteId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {

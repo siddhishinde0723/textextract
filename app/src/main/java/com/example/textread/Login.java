@@ -7,7 +7,9 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.net.Uri;
 import android.os.Bundle;
 import android.se.omapi.Session;
@@ -20,6 +22,7 @@ import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 
 import android.text.TextUtils;
+import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -53,6 +56,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
 
@@ -68,18 +73,21 @@ public class Login extends AppCompatActivity {
 
     // Creating progress dialog
     ProgressDialog progressDialog;
-    CallbackManager mCallbackManager;
+    // CallbackManager mCallbackManager;
 
     // Creating FirebaseAuth object
     FirebaseAuth firebaseAuth;
     GoogleSignInClient mGoogleSignInClient;
     private static int RC_SIGN_IN = 1;
     Session session;
+    private CallbackManager mCallbackManager;
+    private LoginManager loginManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        printHashKey();
         // Assign ID's
         email = (EditText) findViewById(R.id.editText_email);
         password = (EditText) findViewById(R.id.editText_password);
@@ -97,15 +105,17 @@ public class Login extends AppCompatActivity {
         progressDialog = new ProgressDialog(Login.this);
         // Assign FirebaseAuth instance to FirebaseAuth object
         firebaseAuth = FirebaseAuth.getInstance();
-        FacebookSdk.sdkInitialize(Login.this);
 
         // Initialize Facebook Login button
+        FacebookSdk.sdkInitialize(Login.this);
         mCallbackManager = CallbackManager.Factory.create();
         sign_facebook = findViewById(R.id.login_facbook);
         sign_facebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 facelogin();
+
             }
         });
 
@@ -199,6 +209,33 @@ public class Login extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void printHashKey() {
+        try {
+
+            PackageInfo info
+                    = getPackageManager().getPackageInfo(
+                    "com.example.textread",
+                    PackageManager.GET_SIGNATURES);
+
+            for (Signature signature : info.signatures) {
+
+                MessageDigest md
+                        = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash:",
+                        Base64.encodeToString(
+                                md.digest(),
+                                Base64.DEFAULT));
+            }
+        }
+
+        catch (PackageManager.NameNotFoundException e) {
+        }
+
+        catch (NoSuchAlgorithmException e) {
+        }
     }
 
     private void handleFacebookAccessToken(AccessToken token) {
