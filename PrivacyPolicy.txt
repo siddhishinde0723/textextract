@@ -1,7 +1,7 @@
 <h1>Privacy Policy</h1>
-<p>Last updated: March 26, 2021</p>
+<p>Last updated: April 08, 2021</p>
 <p>This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.</p>
-<p>We use Your Personal data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy. This Privacy Policy has been created with the help of the <a href="https://www.privacypolicies.com/privacy-policy-generator/" target="_blank">Privacy Policy Generator</a>.</p>
+<p>We use Your Personal data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy. This Privacy Policy has been created with the help of the <a href="https://www.freeprivacypolicy.com/free-privacy-policy-generator/" target="_blank">Privacy Policy Generator</a>.</p>
 <h1>Interpretation and Definitions</h1>
 <h2>Interpretation</h2>
 <p>The words of which the initial letter is capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.</p>
@@ -15,10 +15,10 @@
 <p><strong>Affiliate</strong> means an entity that controls, is controlled by or is under common control with a party, where &quot;control&quot; means ownership of 50% or more of the shares, equity interest or other securities entitled to vote for election of directors or other managing authority.</p>
 </li>
 <li>
-<p><strong>Application</strong> means the software program provided by the Company downloaded by You on any electronic device, named TextRead</p>
+<p><strong>Application</strong> means the software program provided by the Company downloaded by You on any electronic device, named Text Read</p>
 </li>
 <li>
-<p><strong>Company</strong> (referred to as either &quot;the Company&quot;, &quot;We&quot;, &quot;Us&quot; or &quot;Our&quot; in this Agreement) refers to TextRead.</p>
+<p><strong>Company</strong> (referred to as either &quot;the Company&quot;, &quot;We&quot;, &quot;Us&quot; or &quot;Our&quot; in this Agreement) refers to Text Read.</p>
 </li>
 <li>
 <p><strong>Country</strong> refers to: Maharashtra,  India</p>
@@ -52,6 +52,9 @@
 <ul>
 <li>
 <p>Email address</p>
+</li>
+<li>
+<p>First name and last name</p>
 </li>
 <li>
 <p>Usage Data</p>
@@ -135,10 +138,10 @@
 <p>We may use third-party Service Providers to provide better improvement of our Service.</p>
 <ul>
 <li>
-<p><strong>FreshDesk</strong></p>
-<p>FreshDesk is a customer support software. The service is operated by Freshworks, Inc.</p>
-<p>FreshDesk service may collect information from Your Device.</p>
-<p>The information gathered by FreshDesk is held in accordance with its Privacy Policy: <a href="https://www.freshworks.com/privacy/" rel="external nofollow noopener" target="_blank">https://www.freshworks.com/privacy/</a></p>
+<p><strong>Google Places</strong></p>
+<p>Google Places is a service that returns information about places using HTTP requests. It is operated by Google</p>
+<p>Google Places service may collect information from You and from Your Device for security purposes.</p>
+<p>The information gathered by Google Places is held in accordance with the Privacy Policy of Google: <a href="https://www.google.com/intl/en/policies/privacy/" rel="external nofollow noopener" target="_blank">https://www.google.com/intl/en/policies/privacy/</a></p>
 </li>
 </ul>
 <h1>Children's Privacy</h1>
